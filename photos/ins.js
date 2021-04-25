@@ -119,8 +119,8 @@
                 for (var i = 0, len = data.link.length; i < len; i++) {
                     /*var minSrc = 'https://raw.githubusercontent.com/ainimini/Picture/master/' + data.link[i];
                     var src = 'https://raw.githubusercontent.com/ainimini/Picture/master/' + data.link[i];*/
-                    var minSrc = 'https://github.com/StefanXiepj/BlogPicture/raw/main/min_photos/' + data.link[i];
-                    var src = 'https://github.com/StefanXiepj/BlogPicture/raw/main/photos/' + data.link[i];
+                    var minSrc = 'https://raw.githubusercontent.com/StefanXiepj/BlogPicture/raw/main/min_photos/' + data.link[i];
+                    var src = 'https://raw.githubusercontent.com/StefanXiepj/BlogPicture/raw/main/photos/' + data.link[i];
                     var type = data.type[i];
                     var target = src + (type === 'video' ? '.mp4' : '.jpg');
                     src += '';
