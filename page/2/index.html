@@ -176,109 +176,6 @@
           <div id="js-content" class="content-ll">
             
   
-    <article id="post-BigData-Note" class="article article-type-post  article-index" itemscope itemprop="blogPost">
-  <div class="article-inner">
-    
-      <header class="article-header">
-        
-  
-    <h1 itemprop="name">
-      <a class="article-title" href="/archives/f6e4740a.html">走进大数据的世界</a>
-    </h1>
-  
-
-        
-        <a href="/archives/f6e4740a.html" class="archive-article-date">
-  	<time datetime="2020-08-20T03:41:43.000Z" itemprop="datePublished"><i class="icon-calendar icon"></i>2020-08-20</time>
-</a>
-        
-
-        <!-- 需要添加的位置 -->
-        <!-- 开始添加字数统计-->
-        
-        <!-- 添加完成 -->
-
-        
-      </header>
-    
-    <div class="article-entry" itemprop="articleBody">
-      
-        <p>走进大数据的世界, 徜徉在数据的海洋里…</p>
-        
-          <a class="article-more-a" href="/archives/f6e4740a.html#more">more >></a>
-        
-      
-
-
-
-  <div class="declare" hidden="hidden"></div>
-
-
-
-      
-    </div>
-    <div class="article-info article-info-index">
-      
-      
-	<div class="article-tag tagcloud">
-		<i class="icon-price-tags icon"></i>
-		<ul class="article-tag-list">
-			 
-        		<li class="article-tag-list-item">
-                                    		
-                         	<a href="javascript:void(0)" class="js-tag article-tag-list-link color2">hadoop</a>
-                                    
-		        </li>
-      		
-		</ul>
-	</div>
-
-
-      
-	<div class="article-category tagcloud">
-		<i class="icon-book icon"></i>
-		<ul class="article-tag-list">
-			 
-                            <li class="article-tag-list-item">
-                		<a href="/categories/hadoop//" class="article-tag-list-link color2">hadoop</a>
-                            </li>
-      		
-		</ul>
-	</div>
-
-
-      
-        <p class="article-more-link">
-          <a class="article-more-a" href="/archives/f6e4740a.html">展开全文 >></a>
-        </p>
-      
-
-      
-      <div class="clearfix"></div>
-    </div>
-  </div>
-</article>
-
-<aside class="wrap-side-operation">
-    <div class="mod-side-operation">
-        
-        <div class="jump-container" id="js-jump-container" style="display:none;">
-            <a href="javascript:void(0)" class="mod-side-operation__jump-to-top">
-                <i class="icon-font icon-back"></i>
-            </a>
-            <div id="js-jump-plan-container" class="jump-plan-container" style="top: -11px;">
-                <i class="icon-font icon-plane jump-plane"></i>
-            </div>
-        </div>
-        
-        
-    </div>
-</aside>
-
-
-
-
-  
     <article id="post-HivePrecisionDiffrenentFromSpark" class="article article-type-post  article-index" itemscope itemprop="blogPost">
   <div class="article-inner">
     
@@ -306,7 +203,9 @@
     
     <div class="article-entry" itemprop="articleBody">
       
-        <h1 id="精度差异点"><a href="#精度差异点" class="headerlink" title="精度差异点:"></a>精度差异点:</h1><h2 id="常量解析不一致"><a href="#常量解析不一致" class="headerlink" title="常量解析不一致"></a>常量解析不一致</h2><p>对小数常量(如 0.1 ), Hive解析完之后是<code>double</code>类型; Spark解析完之后是decimal类型</p>
+        <span id="more"></span>
+
+<h1 id="精度差异点"><a href="#精度差异点" class="headerlink" title="精度差异点:"></a>精度差异点:</h1><h2 id="常量解析不一致"><a href="#常量解析不一致" class="headerlink" title="常量解析不一致"></a>常量解析不一致</h2><p>对小数常量(如 0.1 ), Hive解析完之后是<code>double</code>类型; Spark解析完之后是decimal类型</p>
 <p>影响: Hive返回是按double类型返回, 而Spark返回是decimal, 从而精度存在差异</p>
 <h2 id="丢失精度"><a href="#丢失精度" class="headerlink" title="丢失精度"></a>丢失精度</h2><p>在除法运算中, 可以设置参数</p>
 <p> <code>set spark.sql.decimalOperations.allowPrecisionLoss=false</code></p>
@@ -1137,6 +1036,98 @@
 
 
   
+    <article id="post-beeline-f-M" class="article article-type-post  article-index" itemscope itemprop="blogPost">
+  <div class="article-inner">
+    
+      <header class="article-header">
+        
+  
+    <h1 itemprop="name">
+      <a class="article-title" href="/archives/241842c7.html">beeline -f 导出结果文件包含特殊字符</a>
+    </h1>
+  
+
+        
+        <a href="/archives/241842c7.html" class="archive-article-date">
+  	<time datetime="2020-06-12T15:04:45.000Z" itemprop="datePublished"><i class="icon-calendar icon"></i>2020-06-12</time>
+</a>
+        
+
+        <!-- 需要添加的位置 -->
+        <!-- 开始添加字数统计-->
+        
+        <!-- 添加完成 -->
+
+        
+      </header>
+    
+    <div class="article-entry" itemprop="articleBody">
+      
+        <p>在hive引擎的产品化过程中，hive执行的日志可视化展示是十分重要的一环。我们在抓取hive引擎的返回日志并导入文件之后发现，存在很多特殊字符。</p>
+        
+          <a class="article-more-a" href="/archives/241842c7.html#more">more >></a>
+        
+      
+
+
+
+  <div class="declare" hidden="hidden"></div>
+
+
+
+      
+    </div>
+    <div class="article-info article-info-index">
+      
+      
+	<div class="article-tag tagcloud">
+		<i class="icon-price-tags icon"></i>
+		<ul class="article-tag-list">
+			 
+        		<li class="article-tag-list-item">
+                                    		
+                         	<a href="javascript:void(0)" class="js-tag article-tag-list-link color5">hive</a>
+                                    
+		        </li>
+      		
+		</ul>
+	</div>
+
+
+      
+
+      
+        <p class="article-more-link">
+          <a class="article-more-a" href="/archives/241842c7.html">展开全文 >></a>
+        </p>
+      
+
+      
+      <div class="clearfix"></div>
+    </div>
+  </div>
+</article>
+
+<aside class="wrap-side-operation">
+    <div class="mod-side-operation">
+        
+        <div class="jump-container" id="js-jump-container" style="display:none;">
+            <a href="javascript:void(0)" class="mod-side-operation__jump-to-top">
+                <i class="icon-font icon-back"></i>
+            </a>
+            <div id="js-jump-plan-container" class="jump-plan-container" style="top: -11px;">
+                <i class="icon-font icon-plane jump-plane"></i>
+            </div>
+        </div>
+        
+        
+    </div>
+</aside>
+
+
+
+
+  
   
     <nav id="page-nav">
       <a class="extend prev" rel="prev" href="/">&amp;laquo; Prev</a><a class="page-number" href="/">1</a><span class="page-number current">2</span><a class="page-number" href="/page/3/">3</a><a class="page-number" href="/page/4/">4</a><span class="space">&hellip;</span><a class="page-number" href="/page/6/">6</a><a class="extend next" rel="next" href="/page/3/">Next &amp;raquo;</a>
@@ -1280,15 +1271,15 @@ return o(i(t),arguments.length<2?void 0:u(arguments[1]))}})},function(t,n,r){var
               </li>
              
               <li class="article-tag-list-item">
+                <a href="javascript:void(0)" class="js-tag color5">Hive</a>
+              </li>
+             
+              <li class="article-tag-list-item">
                 <a href="javascript:void(0)" class="js-tag color2">Hadoop</a>
               </li>
              
               <li class="article-tag-list-item">
                 <a href="javascript:void(0)" class="js-tag color5">java</a>
-              </li>
-             
-              <li class="article-tag-list-item">
-                <a href="javascript:void(0)" class="js-tag color5">Hive</a>
               </li>
              
               <li class="article-tag-list-item">
@@ -1305,6 +1296,10 @@ return o(i(t),arguments.length<2?void 0:u(arguments[1]))}})},function(t,n,r){var
              
               <li class="article-tag-list-item">
                 <a href="javascript:void(0)" class="js-tag color4">jvm</a>
+              </li>
+             
+              <li class="article-tag-list-item">
+                <a href="javascript:void(0)" class="js-tag color4">mac</a>
               </li>
              
               <li class="article-tag-list-item">
@@ -1333,6 +1328,10 @@ return o(i(t),arguments.length<2?void 0:u(arguments[1]))}})},function(t,n,r){var
              
               <li class="article-tag-list-item">
                 <a href="javascript:void(0)" class="js-tag color2">log4j2</a>
+              </li>
+             
+              <li class="article-tag-list-item">
+                <a href="javascript:void(0)" class="js-tag color4">git</a>
               </li>
             
             <div class="clearfix"></div>

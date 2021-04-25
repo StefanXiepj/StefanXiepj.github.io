@@ -176,98 +176,6 @@
           <div id="js-content" class="content-ll">
             
   
-    <article id="post-beeline-f-M" class="article article-type-post  article-index" itemscope itemprop="blogPost">
-  <div class="article-inner">
-    
-      <header class="article-header">
-        
-  
-    <h1 itemprop="name">
-      <a class="article-title" href="/archives/241842c7.html">beeline -f 导出结果文件包含特殊字符</a>
-    </h1>
-  
-
-        
-        <a href="/archives/241842c7.html" class="archive-article-date">
-  	<time datetime="2020-06-12T15:04:45.000Z" itemprop="datePublished"><i class="icon-calendar icon"></i>2020-06-12</time>
-</a>
-        
-
-        <!-- 需要添加的位置 -->
-        <!-- 开始添加字数统计-->
-        
-        <!-- 添加完成 -->
-
-        
-      </header>
-    
-    <div class="article-entry" itemprop="articleBody">
-      
-        <p>在hive引擎的产品化过程中，hive执行的日志可视化展示是十分重要的一环。我们在抓取hive引擎的返回日志并导入文件之后发现，存在很多特殊字符。</p>
-        
-          <a class="article-more-a" href="/archives/241842c7.html#more">more >></a>
-        
-      
-
-
-
-  <div class="declare" hidden="hidden"></div>
-
-
-
-      
-    </div>
-    <div class="article-info article-info-index">
-      
-      
-	<div class="article-tag tagcloud">
-		<i class="icon-price-tags icon"></i>
-		<ul class="article-tag-list">
-			 
-        		<li class="article-tag-list-item">
-                                    		
-                         	<a href="javascript:void(0)" class="js-tag article-tag-list-link color5">hive</a>
-                                    
-		        </li>
-      		
-		</ul>
-	</div>
-
-
-      
-
-      
-        <p class="article-more-link">
-          <a class="article-more-a" href="/archives/241842c7.html">展开全文 >></a>
-        </p>
-      
-
-      
-      <div class="clearfix"></div>
-    </div>
-  </div>
-</article>
-
-<aside class="wrap-side-operation">
-    <div class="mod-side-operation">
-        
-        <div class="jump-container" id="js-jump-container" style="display:none;">
-            <a href="javascript:void(0)" class="mod-side-operation__jump-to-top">
-                <i class="icon-font icon-back"></i>
-            </a>
-            <div id="js-jump-plan-container" class="jump-plan-container" style="top: -11px;">
-                <i class="icon-font icon-plane jump-plane"></i>
-            </div>
-        </div>
-        
-        
-    </div>
-</aside>
-
-
-
-
-  
     <article id="post-Note-pssh" class="article article-type-post  article-index" itemscope itemprop="blogPost">
   <div class="article-inner">
     
@@ -387,7 +295,7 @@
     
     <div class="article-entry" itemprop="articleBody">
       
-        <p>​        我与大数据也是颇有渊源的。我还记得正儿八经地开始搬砖时，一开始便是etl脚本的改造，负责将tcl实现的脚本改写为python实现的Hive SQL脚本。随后又负责了文件的加解密和校验，后来才知道这项工作是属于“数据稽核”，其实就是对ftp下载的文件（文件中包含数据有多少条，加密值等），进行解密并校验数据是否存在异常。再后来接触到数仓，血缘关系，元数据治理，数据质量，任务调度，离线批处理，实时流处理等等。语言/技术栈从python，java，scala，hive，spark，zookeeper，kafka，flume，springmvc，springboot，如今又机缘巧合地专注于hive和spark源码相关的工作，再回首来读这本大数据之路，颇有感触。</p>
+        <p>数仓相关概念。</p>
         
           <a class="article-more-a" href="/archives/b34d08b8.html#more">more >></a>
         
@@ -1115,6 +1023,101 @@
 
 
   
+    <article id="post-JvmTools-4" class="article article-type-post  article-index" itemscope itemprop="blogPost">
+  <div class="article-inner">
+    
+      <header class="article-header">
+        
+  
+    <h1 itemprop="name">
+      <a class="article-title" href="/archives/45510040.html">虚拟机性能监控与故障处理工具(4)——jmap</a>
+    </h1>
+  
+
+        
+        <a href="/archives/45510040.html" class="archive-article-date">
+  	<time datetime="2020-04-06T12:40:30.000Z" itemprop="datePublished"><i class="icon-calendar icon"></i>2020-04-06</time>
+</a>
+        
+
+        <!-- 需要添加的位置 -->
+        <!-- 开始添加字数统计-->
+        
+        <!-- 添加完成 -->
+
+        
+      </header>
+    
+    <div class="article-entry" itemprop="articleBody">
+      
+        <p><em>《深入理解Java虚拟机》学习笔记。</em></p>
+<p>在定位问题的时候，知识和经验是关键基础，数据是依据，而工具是运用知识处理数据的手段…</p>
+<p><code>jmap</code>命令用于生成堆转储快照（一般称为heapdump或dump文件）。</p>
+<p><a target="_blank" rel="noopener" href="https://docs.oracle.com/javase/8/docs/technotes/tools/unix/jmap.html">https://docs.oracle.com/javase/8/docs/technotes/tools/unix/jmap.html</a></p>
+        
+          <a class="article-more-a" href="/archives/45510040.html#more">more >></a>
+        
+      
+
+
+
+  <div class="declare" hidden="hidden"></div>
+
+
+
+      
+    </div>
+    <div class="article-info article-info-index">
+      
+      
+	<div class="article-tag tagcloud">
+		<i class="icon-price-tags icon"></i>
+		<ul class="article-tag-list">
+			 
+        		<li class="article-tag-list-item">
+                                    		
+                         	<a href="javascript:void(0)" class="js-tag article-tag-list-link color4">jvm</a>
+                                    
+		        </li>
+      		
+		</ul>
+	</div>
+
+
+      
+
+      
+        <p class="article-more-link">
+          <a class="article-more-a" href="/archives/45510040.html">展开全文 >></a>
+        </p>
+      
+
+      
+      <div class="clearfix"></div>
+    </div>
+  </div>
+</article>
+
+<aside class="wrap-side-operation">
+    <div class="mod-side-operation">
+        
+        <div class="jump-container" id="js-jump-container" style="display:none;">
+            <a href="javascript:void(0)" class="mod-side-operation__jump-to-top">
+                <i class="icon-font icon-back"></i>
+            </a>
+            <div id="js-jump-plan-container" class="jump-plan-container" style="top: -11px;">
+                <i class="icon-font icon-plane jump-plane"></i>
+            </div>
+        </div>
+        
+        
+    </div>
+</aside>
+
+
+
+
+  
   
     <nav id="page-nav">
       <a class="extend prev" rel="prev" href="/page/2/">&amp;laquo; Prev</a><a class="page-number" href="/">1</a><a class="page-number" href="/page/2/">2</a><span class="page-number current">3</span><a class="page-number" href="/page/4/">4</a><a class="page-number" href="/page/5/">5</a><a class="page-number" href="/page/6/">6</a><a class="extend next" rel="next" href="/page/4/">Next &amp;raquo;</a>
@@ -1258,15 +1261,15 @@ return o(i(t),arguments.length<2?void 0:u(arguments[1]))}})},function(t,n,r){var
               </li>
              
               <li class="article-tag-list-item">
+                <a href="javascript:void(0)" class="js-tag color5">Hive</a>
+              </li>
+             
+              <li class="article-tag-list-item">
                 <a href="javascript:void(0)" class="js-tag color2">Hadoop</a>
               </li>
              
               <li class="article-tag-list-item">
                 <a href="javascript:void(0)" class="js-tag color5">java</a>
-              </li>
-             
-              <li class="article-tag-list-item">
-                <a href="javascript:void(0)" class="js-tag color5">Hive</a>
               </li>
              
               <li class="article-tag-list-item">
@@ -1283,6 +1286,10 @@ return o(i(t),arguments.length<2?void 0:u(arguments[1]))}})},function(t,n,r){var
              
               <li class="article-tag-list-item">
                 <a href="javascript:void(0)" class="js-tag color4">jvm</a>
+              </li>
+             
+              <li class="article-tag-list-item">
+                <a href="javascript:void(0)" class="js-tag color4">mac</a>
               </li>
              
               <li class="article-tag-list-item">
@@ -1311,6 +1318,10 @@ return o(i(t),arguments.length<2?void 0:u(arguments[1]))}})},function(t,n,r){var
              
               <li class="article-tag-list-item">
                 <a href="javascript:void(0)" class="js-tag color2">log4j2</a>
+              </li>
+             
+              <li class="article-tag-list-item">
+                <a href="javascript:void(0)" class="js-tag color4">git</a>
               </li>
             
             <div class="clearfix"></div>

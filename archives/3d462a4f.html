@@ -8,15 +8,15 @@
   <link rel="dns-prefetch" href="https://stefanxiepj.github.io">
   <title>HivePrecisionDiffrenentFromSpark | Late Summer</title>
   <meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1">
-  <meta name="description" content="精度差异点:常量解析不一致对小数常量(如 0.1 ), Hive解析完之后是double类型; Spark解析完之后是decimal类型 影响: Hive返回是按double类型返回, 而Spark返回是decimal, 从而精度存在差异 丢失精度在除法运算中, 可以设置参数  set spark.sql.decimalOperations.allowPrecisionLoss&#x3D;false 来保持">
+  <meta name="description" content="精度差异点:常量解析不一致对小数常量(如 0.1 ), Hive解析完之后是double类型; Spark解析完之后是decimal类型 影响: Hive返回是按double类型返回, 而Spark返回是decimal, 从而精度存在差异 丢失精度在除法运算中, 可以设置参数  set spark.sql.decimalOperations.allowPrecisionLoss&#x3D;false 来">
 <meta property="og:type" content="article">
 <meta property="og:title" content="HivePrecisionDiffrenentFromSpark">
 <meta property="og:url" content="https://stefanxiepj.github.io/archives/3d462a4f.html">
 <meta property="og:site_name" content="Late Summer">
-<meta property="og:description" content="精度差异点:常量解析不一致对小数常量(如 0.1 ), Hive解析完之后是double类型; Spark解析完之后是decimal类型 影响: Hive返回是按double类型返回, 而Spark返回是decimal, 从而精度存在差异 丢失精度在除法运算中, 可以设置参数  set spark.sql.decimalOperations.allowPrecisionLoss&#x3D;false 来保持">
+<meta property="og:description" content="精度差异点:常量解析不一致对小数常量(如 0.1 ), Hive解析完之后是double类型; Spark解析完之后是decimal类型 影响: Hive返回是按double类型返回, 而Spark返回是decimal, 从而精度存在差异 丢失精度在除法运算中, 可以设置参数  set spark.sql.decimalOperations.allowPrecisionLoss&#x3D;false 来">
 <meta property="og:locale">
 <meta property="article:published_time" content="2020-07-29T01:46:14.000Z">
-<meta property="article:modified_time" content="2021-04-24T16:21:38.652Z">
+<meta property="article:modified_time" content="2021-04-25T11:51:01.236Z">
 <meta property="article:author" content="Jeff.R">
 <meta property="article:tag" content="hive,spark,hadoop,java,scala">
 <meta name="twitter:card" content="summary">
@@ -207,7 +207,9 @@
     
     <div class="article-entry" itemprop="articleBody">
       
-        <h1 id="精度差异点"><a href="#精度差异点" class="headerlink" title="精度差异点:"></a>精度差异点:</h1><h2 id="常量解析不一致"><a href="#常量解析不一致" class="headerlink" title="常量解析不一致"></a>常量解析不一致</h2><p>对小数常量(如 0.1 ), Hive解析完之后是<code>double</code>类型; Spark解析完之后是decimal类型</p>
+        <span id="more"></span>
+
+<h1 id="精度差异点"><a href="#精度差异点" class="headerlink" title="精度差异点:"></a>精度差异点:</h1><h2 id="常量解析不一致"><a href="#常量解析不一致" class="headerlink" title="常量解析不一致"></a>常量解析不一致</h2><p>对小数常量(如 0.1 ), Hive解析完之后是<code>double</code>类型; Spark解析完之后是decimal类型</p>
 <p>影响: Hive返回是按double类型返回, 而Spark返回是decimal, 从而精度存在差异</p>
 <h2 id="丢失精度"><a href="#丢失精度" class="headerlink" title="丢失精度"></a>丢失精度</h2><p>在除法运算中, 可以设置参数</p>
 <p> <code>set spark.sql.decimalOperations.allowPrecisionLoss=false</code></p>
@@ -534,15 +536,15 @@ return o(i(t),arguments.length<2?void 0:u(arguments[1]))}})},function(t,n,r){var
               </li>
              
               <li class="article-tag-list-item">
+                <a href="javascript:void(0)" class="js-tag color5">Hive</a>
+              </li>
+             
+              <li class="article-tag-list-item">
                 <a href="javascript:void(0)" class="js-tag color2">Hadoop</a>
               </li>
              
               <li class="article-tag-list-item">
                 <a href="javascript:void(0)" class="js-tag color5">java</a>
-              </li>
-             
-              <li class="article-tag-list-item">
-                <a href="javascript:void(0)" class="js-tag color5">Hive</a>
               </li>
              
               <li class="article-tag-list-item">
@@ -559,6 +561,10 @@ return o(i(t),arguments.length<2?void 0:u(arguments[1]))}})},function(t,n,r){var
              
               <li class="article-tag-list-item">
                 <a href="javascript:void(0)" class="js-tag color4">jvm</a>
+              </li>
+             
+              <li class="article-tag-list-item">
+                <a href="javascript:void(0)" class="js-tag color4">mac</a>
               </li>
              
               <li class="article-tag-list-item">
@@ -587,6 +593,10 @@ return o(i(t),arguments.length<2?void 0:u(arguments[1]))}})},function(t,n,r){var
              
               <li class="article-tag-list-item">
                 <a href="javascript:void(0)" class="js-tag color2">log4j2</a>
+              </li>
+             
+              <li class="article-tag-list-item">
+                <a href="javascript:void(0)" class="js-tag color4">git</a>
               </li>
             
             <div class="clearfix"></div>
