@@ -2,6 +2,27 @@
 <urlset xmlns="http://www.sitemaps.org/schemas/sitemap/0.9">
   
   <url>
+    <loc>https://stefanxiepj.github.io/archives/82a41918.html</loc>
+    
+    <lastmod>2021-04-25</lastmod>
+    
+  </url>
+  
+  <url>
+    <loc>https://stefanxiepj.github.io/archives/3d462a4f.html</loc>
+    
+    <lastmod>2021-04-25</lastmod>
+    
+  </url>
+  
+  <url>
+    <loc>https://stefanxiepj.github.io/archives/b11eb2cc.html</loc>
+    
+    <lastmod>2021-04-25</lastmod>
+    
+  </url>
+  
+  <url>
     <loc>https://stefanxiepj.github.io/photos/data.json</loc>
     
     <lastmod>2021-04-25</lastmod>
@@ -23,21 +44,7 @@
   </url>
   
   <url>
-    <loc>https://stefanxiepj.github.io/archives/82a41918.html</loc>
-    
-    <lastmod>2021-04-25</lastmod>
-    
-  </url>
-  
-  <url>
     <loc>https://stefanxiepj.github.io/archives/6cd1c454.html</loc>
-    
-    <lastmod>2021-04-25</lastmod>
-    
-  </url>
-  
-  <url>
-    <loc>https://stefanxiepj.github.io/archives/3d462a4f.html</loc>
     
     <lastmod>2021-04-25</lastmod>
     
@@ -261,14 +268,14 @@
   </url>
   
   <url>
-    <loc>https://stefanxiepj.github.io/archives/599c076e.html</loc>
+    <loc>https://stefanxiepj.github.io/archives/2dbf7bb4.html</loc>
     
     <lastmod>2021-04-24</lastmod>
     
   </url>
   
   <url>
-    <loc>https://stefanxiepj.github.io/archives/2dbf7bb4.html</loc>
+    <loc>https://stefanxiepj.github.io/archives/599c076e.html</loc>
     
     <lastmod>2021-04-24</lastmod>
     
@@ -324,13 +331,6 @@
   </url>
   
   <url>
-    <loc>https://stefanxiepj.github.io/archives/b11eb2cc.html</loc>
-    
-    <lastmod>2021-04-24</lastmod>
-    
-  </url>
-  
-  <url>
     <loc>https://stefanxiepj.github.io/archives/58d895e2.html</loc>
     
     <lastmod>2021-04-24</lastmod>
@@ -352,13 +352,6 @@
   </url>
   
   <url>
-    <loc>https://stefanxiepj.github.io/archives/3a046ff9.html</loc>
-    
-    <lastmod>2021-04-24</lastmod>
-    
-  </url>
-  
-  <url>
     <loc>https://stefanxiepj.github.io/archives/384892e8.html</loc>
     
     <lastmod>2021-04-24</lastmod>
@@ -366,7 +359,7 @@
   </url>
   
   <url>
-    <loc>https://stefanxiepj.github.io/archives/b4b5c81c.html</loc>
+    <loc>https://stefanxiepj.github.io/archives/3a046ff9.html</loc>
     
     <lastmod>2021-04-24</lastmod>
     
@@ -374,6 +367,13 @@
   
   <url>
     <loc>https://stefanxiepj.github.io/archives/1e79ecb9.html</loc>
+    
+    <lastmod>2021-04-24</lastmod>
+    
+  </url>
+  
+  <url>
+    <loc>https://stefanxiepj.github.io/archives/b4b5c81c.html</loc>
     
     <lastmod>2021-04-24</lastmod>
     
@@ -459,6 +459,13 @@
   </url>
   
   <url>
+    <loc>https://stefanxiepj.github.io/tags/Mysql/</loc>
+    <lastmod>2021-04-25</lastmod>
+    <changefreq>daily</changefreq>
+    <priority>0.6</priority>
+  </url>
+  
+  <url>
     <loc>https://stefanxiepj.github.io/tags/hadoop/</loc>
     <lastmod>2021-04-25</lastmod>
     <changefreq>daily</changefreq>
@@ -473,21 +480,14 @@
   </url>
   
   <url>
-    <loc>https://stefanxiepj.github.io/tags/Hadoop/</loc>
-    <lastmod>2021-04-25</lastmod>
-    <changefreq>daily</changefreq>
-    <priority>0.6</priority>
-  </url>
-  
-  <url>
-    <loc>https://stefanxiepj.github.io/tags/Mysql/</loc>
-    <lastmod>2021-04-25</lastmod>
-    <changefreq>daily</changefreq>
-    <priority>0.6</priority>
-  </url>
-  
-  <url>
     <loc>https://stefanxiepj.github.io/tags/java/</loc>
+    <lastmod>2021-04-25</lastmod>
+    <changefreq>daily</changefreq>
+    <priority>0.6</priority>
+  </url>
+  
+  <url>
+    <loc>https://stefanxiepj.github.io/tags/Hadoop/</loc>
     <lastmod>2021-04-25</lastmod>
     <changefreq>daily</changefreq>
     <priority>0.6</priority>
@@ -529,6 +529,13 @@
   </url>
   
   <url>
+    <loc>https://stefanxiepj.github.io/tags/mac/</loc>
+    <lastmod>2021-04-25</lastmod>
+    <changefreq>daily</changefreq>
+    <priority>0.6</priority>
+  </url>
+  
+  <url>
     <loc>https://stefanxiepj.github.io/tags/mysql/</loc>
     <lastmod>2021-04-25</lastmod>
     <changefreq>daily</changefreq>
@@ -558,13 +565,6 @@
   
   <url>
     <loc>https://stefanxiepj.github.io/tags/%E9%9A%8F%E7%AC%94/</loc>
-    <lastmod>2021-04-25</lastmod>
-    <changefreq>daily</changefreq>
-    <priority>0.6</priority>
-  </url>
-  
-  <url>
-    <loc>https://stefanxiepj.github.io/tags/mac/</loc>
     <lastmod>2021-04-25</lastmod>
     <changefreq>daily</changefreq>
     <priority>0.6</priority>
@@ -615,6 +615,13 @@
   </url>
   
   <url>
+    <loc>https://stefanxiepj.github.io/categories/Mysql/</loc>
+    <lastmod>2021-04-25</lastmod>
+    <changefreq>daily</changefreq>
+    <priority>0.6</priority>
+  </url>
+  
+  <url>
     <loc>https://stefanxiepj.github.io/categories/Hive/</loc>
     <lastmod>2021-04-25</lastmod>
     <changefreq>daily</changefreq>
@@ -630,13 +637,6 @@
   
   <url>
     <loc>https://stefanxiepj.github.io/categories/linux/</loc>
-    <lastmod>2021-04-25</lastmod>
-    <changefreq>daily</changefreq>
-    <priority>0.6</priority>
-  </url>
-  
-  <url>
-    <loc>https://stefanxiepj.github.io/categories/Mysql/</loc>
     <lastmod>2021-04-25</lastmod>
     <changefreq>daily</changefreq>
     <priority>0.6</priority>

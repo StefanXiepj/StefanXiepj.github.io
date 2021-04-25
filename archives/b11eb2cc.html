@@ -8,16 +8,16 @@
   <link rel="dns-prefetch" href="https://stefanxiepj.github.io">
   <title>HowToTroubleShootCPUHigh | Late Summer</title>
   <meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1">
-  <meta name="description" content="本文来聊聊如何排查Cpu高的问题。 1 先聊聊方法论我记得大约是三年前，有次去某节跳动面试，面试官突然问我你做这件事的方法论是什么？当时一时懵逼，心想这还要啥方法论。再后来慢慢地发现，方法论这三个词越来越火，大佬们聊天都不再聊如何实现的细节，聊的都是“方法论”了。以前看不懂，现在回想起来，自己也是蹭着蹭着说方法论的曾经厌恶的觉得是装逼的人了。想想本文中确实有必要先聊聊方法论，才能更顺畅地展开下面的">
+  <meta name="description" content="本文来聊聊如何排查Cpu高的问题。">
 <meta property="og:type" content="article">
 <meta property="og:title" content="HowToTroubleShootCPUHigh">
 <meta property="og:url" content="https://stefanxiepj.github.io/archives/b11eb2cc.html">
 <meta property="og:site_name" content="Late Summer">
-<meta property="og:description" content="本文来聊聊如何排查Cpu高的问题。 1 先聊聊方法论我记得大约是三年前，有次去某节跳动面试，面试官突然问我你做这件事的方法论是什么？当时一时懵逼，心想这还要啥方法论。再后来慢慢地发现，方法论这三个词越来越火，大佬们聊天都不再聊如何实现的细节，聊的都是“方法论”了。以前看不懂，现在回想起来，自己也是蹭着蹭着说方法论的曾经厌恶的觉得是装逼的人了。想想本文中确实有必要先聊聊方法论，才能更顺畅地展开下面的">
+<meta property="og:description" content="本文来聊聊如何排查Cpu高的问题。">
 <meta property="og:locale">
 <meta property="og:image" content="https://stefanxiepj.github.io/2021/03/27/HowToTroubleShootCPUHigh/flamegraph.png">
 <meta property="article:published_time" content="2021-04-24T09:08:04.000Z">
-<meta property="article:modified_time" content="2021-04-24T16:21:38.656Z">
+<meta property="article:modified_time" content="2021-04-25T16:20:52.638Z">
 <meta property="article:author" content="Jeff.R">
 <meta property="article:tag" content="cpu">
 <meta name="twitter:card" content="summary">
@@ -190,6 +190,8 @@
     <div class="article-entry" itemprop="articleBody">
       
         <p>本文来聊聊如何排查Cpu高的问题。</p>
+<span id="more"></span>
+
 <h1 id="1-先聊聊方法论"><a href="#1-先聊聊方法论" class="headerlink" title="1 先聊聊方法论"></a>1 先聊聊方法论</h1><p>我记得大约是三年前，有次去某节跳动面试，面试官突然问我你做这件事的方法论是什么？当时一时懵逼，心想这还要啥方法论。再后来慢慢地发现，方法论这三个词越来越火，大佬们聊天都不再聊如何实现的细节，聊的都是“方法论”了。以前看不懂，现在回想起来，自己也是蹭着蹭着说方法论的曾经厌恶的觉得是装逼的人了。想想本文中确实有必要先聊聊方法论，才能更顺畅地展开下面的话题。</p>
 <p>我们说排查CPU飙高，也是有一定的程式化的套路的，这个套路其实就是我们所说的方法论。计算机有两大核心CPU和内存，cpu负责计算，内存负责数据的存储以及数据交换（cpu和内存之间的交换，内存和硬盘之间的交换）。</p>
 <p>cpu高通常意味着有密集的计算，常见的如死循环，高并发。所以遇到cpu高，首先是去查看是否有长时间运行的线程占有高比重的cpu；另外一种情况是每个线程运行时间很短，但并发度很高，每个线程运行的性能很差。于是乎，我们这里要划重点了：</p>
@@ -564,6 +566,10 @@ return o(i(t),arguments.length<2?void 0:u(arguments[1]))}})},function(t,n,r){var
               </li>
              
               <li class="article-tag-list-item">
+                <a href="javascript:void(0)" class="js-tag color1">Mysql</a>
+              </li>
+             
+              <li class="article-tag-list-item">
                 <a href="javascript:void(0)" class="js-tag color2">hadoop</a>
               </li>
              
@@ -572,15 +578,11 @@ return o(i(t),arguments.length<2?void 0:u(arguments[1]))}})},function(t,n,r){var
               </li>
              
               <li class="article-tag-list-item">
-                <a href="javascript:void(0)" class="js-tag color2">Hadoop</a>
-              </li>
-             
-              <li class="article-tag-list-item">
-                <a href="javascript:void(0)" class="js-tag color1">Mysql</a>
-              </li>
-             
-              <li class="article-tag-list-item">
                 <a href="javascript:void(0)" class="js-tag color5">java</a>
+              </li>
+             
+              <li class="article-tag-list-item">
+                <a href="javascript:void(0)" class="js-tag color2">Hadoop</a>
               </li>
              
               <li class="article-tag-list-item">
@@ -604,6 +606,10 @@ return o(i(t),arguments.length<2?void 0:u(arguments[1]))}})},function(t,n,r){var
               </li>
              
               <li class="article-tag-list-item">
+                <a href="javascript:void(0)" class="js-tag color4">mac</a>
+              </li>
+             
+              <li class="article-tag-list-item">
                 <a href="javascript:void(0)" class="js-tag color1">mysql</a>
               </li>
              
@@ -621,10 +627,6 @@ return o(i(t),arguments.length<2?void 0:u(arguments[1]))}})},function(t,n,r){var
              
               <li class="article-tag-list-item">
                 <a href="javascript:void(0)" class="js-tag color3">随笔</a>
-              </li>
-             
-              <li class="article-tag-list-item">
-                <a href="javascript:void(0)" class="js-tag color4">mac</a>
               </li>
              
               <li class="article-tag-list-item">

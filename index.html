@@ -585,48 +585,9 @@
     <div class="article-entry" itemprop="articleBody">
       
         <p>本文来聊聊如何排查Cpu高的问题。</p>
-<h1 id="1-先聊聊方法论"><a href="#1-先聊聊方法论" class="headerlink" title="1 先聊聊方法论"></a>1 先聊聊方法论</h1><p>我记得大约是三年前，有次去某节跳动面试，面试官突然问我你做这件事的方法论是什么？当时一时懵逼，心想这还要啥方法论。再后来慢慢地发现，方法论这三个词越来越火，大佬们聊天都不再聊如何实现的细节，聊的都是“方法论”了。以前看不懂，现在回想起来，自己也是蹭着蹭着说方法论的曾经厌恶的觉得是装逼的人了。想想本文中确实有必要先聊聊方法论，才能更顺畅地展开下面的话题。</p>
-<p>我们说排查CPU飙高，也是有一定的程式化的套路的，这个套路其实就是我们所说的方法论。计算机有两大核心CPU和内存，cpu负责计算，内存负责数据的存储以及数据交换（cpu和内存之间的交换，内存和硬盘之间的交换）。</p>
-<p>cpu高通常意味着有密集的计算，常见的如死循环，高并发。所以遇到cpu高，首先是去查看是否有长时间运行的线程占有高比重的cpu；另外一种情况是每个线程运行时间很短，但并发度很高，每个线程运行的性能很差。于是乎，我们这里要划重点了：</p>
-<blockquote>
-<p>CPU高的两个常见场景：</p>
-<p> 1）长时间运行的高cpu线程（比如死循环）</p>
-<p> 2）短时间运行的高并发的低性能的线程</p>
-</blockquote>
-<p>对于两种场景，分别有不同的排查方式。</p>
-<h1 id="2-场景判定"><a href="#2-场景判定" class="headerlink" title="2 场景判定"></a>2 场景判定</h1><p>判定方法如下：</p>
-<blockquote>
-<p>1）top 查看cpu高的进程</p>
-<p>2）top -Hp pid 命令查看进程中占用cpu高的线程</p>
-<p>3）观察高cpu线程的执行耗时情况。如果有长时间不结束的高cpu线程则是场景一；如果每个高cpu线程都很快结束，但数量又很多，则是场景二</p>
-</blockquote>
-<h2 id="2-1-场景一：长时间运行的高cpu线程"><a href="#2-1-场景一：长时间运行的高cpu线程" class="headerlink" title="2.1 场景一：长时间运行的高cpu线程"></a>2.1 场景一：长时间运行的高cpu线程</h2><p>排查流程如下：</p>
-<blockquote>
-<p>1）top -Hp pid 命令查看进程中占用cpu高的线程，并记录下线程id</p>
-<p>2）jstack -l tid &gt; /tmp/pid.js 命令抓取当前进程的栈信息</p>
-<p>3）将 1）中的线程id转换为十六进制：printf “%x\n” tid</p>
-<p>4）根据 4）拿到的十六进制的线程id在栈文件中找到cpu高的线程，然后结合源码分析根因</p>
-</blockquote>
-<p>这里用到的技术栈有：top 命令，jstack命令</p>
-<h2 id="2-2-场景二：短时间运行的高并发的低性能的线程"><a href="#2-2-场景二：短时间运行的高并发的低性能的线程" class="headerlink" title="2.2 场景二：短时间运行的高并发的低性能的线程"></a>2.2 场景二：短时间运行的高并发的低性能的线程</h2><p>这种情况我们要用到火焰图 <a target="_blank" rel="noopener" href="http://www.brendangregg.com/blog/2014-06-12/java-flame-graphs.html">Java Flame Graphs</a>。</p>
-<blockquote>
-<p>火焰图分析主要有两个环节：</p>
-<p> 1）数据的采集（我们使用工具 <a target="_blank" rel="noopener" href="https://github.com/jvm-profiling-tools/async-profiler">Async-profiler</a> ）</p>
-<p> 2）火焰图的渲染（我们使用工具 <a target="_blank" rel="noopener" href="https://github.com/brendangregg/FlameGraph">FlameGraph</a> ）</p>
-</blockquote>
-<p>排查前，需要下载好上述两个工具。</p>
-<p>排查流程如下：</p>
-<blockquote>
-<p>1）数据采集</p>
-<p> ./profiler.sh -d 30 -o collapsed -f /tmp/hive-profile.txt pid</p>
-<p> 这里是说采样时长30秒，采样规范collapsed，采样数据dump至/tmp/hive-profile.txt</p>
-<p>2）火焰图渲染</p>
-<p> ./flamegraph.pl –colors=java /tmp/profile.txt &gt; profile.svg</p>
-</blockquote>
-<p>然后我们就可以通过浏览器打开 profile.svg 文件查看火焰图了。</p>
-<p><img src="https://stefanxiepj.github.io/2021/03/27/HowToTroubleShootCPUHigh/flamegraph.png" alt="火焰图"></p>
-<h1 id="3-总结"><a href="#3-总结" class="headerlink" title="3 总结"></a>3 总结</h1><p>CPU高的排查，除了程式化的方法论外，更多的是需要实践。在工作中遇到问题，千万不要重启完事大吉，一定要深挖下去，每次故障都是我们成长的契机。</p>
-
+        
+          <a class="article-more-a" href="/archives/b11eb2cc.html#more">more >></a>
+        
       
 
 
@@ -1319,6 +1280,10 @@ return o(i(t),arguments.length<2?void 0:u(arguments[1]))}})},function(t,n,r){var
               </li>
              
               <li class="article-tag-list-item">
+                <a href="javascript:void(0)" class="js-tag color1">Mysql</a>
+              </li>
+             
+              <li class="article-tag-list-item">
                 <a href="javascript:void(0)" class="js-tag color2">hadoop</a>
               </li>
              
@@ -1327,15 +1292,11 @@ return o(i(t),arguments.length<2?void 0:u(arguments[1]))}})},function(t,n,r){var
               </li>
              
               <li class="article-tag-list-item">
-                <a href="javascript:void(0)" class="js-tag color2">Hadoop</a>
-              </li>
-             
-              <li class="article-tag-list-item">
-                <a href="javascript:void(0)" class="js-tag color1">Mysql</a>
-              </li>
-             
-              <li class="article-tag-list-item">
                 <a href="javascript:void(0)" class="js-tag color5">java</a>
+              </li>
+             
+              <li class="article-tag-list-item">
+                <a href="javascript:void(0)" class="js-tag color2">Hadoop</a>
               </li>
              
               <li class="article-tag-list-item">
@@ -1359,6 +1320,10 @@ return o(i(t),arguments.length<2?void 0:u(arguments[1]))}})},function(t,n,r){var
               </li>
              
               <li class="article-tag-list-item">
+                <a href="javascript:void(0)" class="js-tag color4">mac</a>
+              </li>
+             
+              <li class="article-tag-list-item">
                 <a href="javascript:void(0)" class="js-tag color1">mysql</a>
               </li>
              
@@ -1376,10 +1341,6 @@ return o(i(t),arguments.length<2?void 0:u(arguments[1]))}})},function(t,n,r){var
              
               <li class="article-tag-list-item">
                 <a href="javascript:void(0)" class="js-tag color3">随笔</a>
-              </li>
-             
-              <li class="article-tag-list-item">
-                <a href="javascript:void(0)" class="js-tag color4">mac</a>
               </li>
              
               <li class="article-tag-list-item">
