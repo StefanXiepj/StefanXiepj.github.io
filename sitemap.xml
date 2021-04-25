@@ -2,6 +2,27 @@
 <urlset xmlns="http://www.sitemaps.org/schemas/sitemap/0.9">
   
   <url>
+    <loc>https://stefanxiepj.github.io/photos/data.json</loc>
+    
+    <lastmod>2021-04-25</lastmod>
+    
+  </url>
+  
+  <url>
+    <loc>https://stefanxiepj.github.io/archives/3fbdb086.html</loc>
+    
+    <lastmod>2021-04-25</lastmod>
+    
+  </url>
+  
+  <url>
+    <loc>https://stefanxiepj.github.io/archives/1c1ededa.html</loc>
+    
+    <lastmod>2021-04-25</lastmod>
+    
+  </url>
+  
+  <url>
     <loc>https://stefanxiepj.github.io/archives/82a41918.html</loc>
     
     <lastmod>2021-04-25</lastmod>
@@ -10,13 +31,6 @@
   
   <url>
     <loc>https://stefanxiepj.github.io/archives/6cd1c454.html</loc>
-    
-    <lastmod>2021-04-25</lastmod>
-    
-  </url>
-  
-  <url>
-    <loc>https://stefanxiepj.github.io/archives/1c1ededa.html</loc>
     
     <lastmod>2021-04-25</lastmod>
     
@@ -68,20 +82,6 @@
     <loc>https://stefanxiepj.github.io/archives/80d2981f.html</loc>
     
     <lastmod>2021-04-25</lastmod>
-    
-  </url>
-  
-  <url>
-    <loc>https://stefanxiepj.github.io/archives/3fbdb086.html</loc>
-    
-    <lastmod>2021-04-25</lastmod>
-    
-  </url>
-  
-  <url>
-    <loc>https://stefanxiepj.github.io/photos/data.json</loc>
-    
-    <lastmod>2021-04-24</lastmod>
     
   </url>
   
@@ -226,14 +226,14 @@
   </url>
   
   <url>
-    <loc>https://stefanxiepj.github.io/archives/10bbd000.html</loc>
+    <loc>https://stefanxiepj.github.io/archives/c12913ce.html</loc>
     
     <lastmod>2021-04-24</lastmod>
     
   </url>
   
   <url>
-    <loc>https://stefanxiepj.github.io/archives/c12913ce.html</loc>
+    <loc>https://stefanxiepj.github.io/archives/10bbd000.html</loc>
     
     <lastmod>2021-04-24</lastmod>
     
@@ -261,14 +261,14 @@
   </url>
   
   <url>
-    <loc>https://stefanxiepj.github.io/archives/599c076e.html</loc>
+    <loc>https://stefanxiepj.github.io/archives/2dbf7bb4.html</loc>
     
     <lastmod>2021-04-24</lastmod>
     
   </url>
   
   <url>
-    <loc>https://stefanxiepj.github.io/archives/2dbf7bb4.html</loc>
+    <loc>https://stefanxiepj.github.io/archives/599c076e.html</loc>
     
     <lastmod>2021-04-24</lastmod>
     
@@ -331,14 +331,14 @@
   </url>
   
   <url>
-    <loc>https://stefanxiepj.github.io/archives/83bf2dd4.html</loc>
+    <loc>https://stefanxiepj.github.io/archives/58d895e2.html</loc>
     
     <lastmod>2021-04-24</lastmod>
     
   </url>
   
   <url>
-    <loc>https://stefanxiepj.github.io/archives/58d895e2.html</loc>
+    <loc>https://stefanxiepj.github.io/archives/83bf2dd4.html</loc>
     
     <lastmod>2021-04-24</lastmod>
     
@@ -480,20 +480,6 @@
   </url>
   
   <url>
-    <loc>https://stefanxiepj.github.io/tags/Hive/</loc>
-    <lastmod>2021-04-25</lastmod>
-    <changefreq>daily</changefreq>
-    <priority>0.6</priority>
-  </url>
-  
-  <url>
-    <loc>https://stefanxiepj.github.io/tags/Hadoop/</loc>
-    <lastmod>2021-04-25</lastmod>
-    <changefreq>daily</changefreq>
-    <priority>0.6</priority>
-  </url>
-  
-  <url>
     <loc>https://stefanxiepj.github.io/tags/java/</loc>
     <lastmod>2021-04-25</lastmod>
     <changefreq>daily</changefreq>
@@ -502,6 +488,20 @@
   
   <url>
     <loc>https://stefanxiepj.github.io/tags/hive/</loc>
+    <lastmod>2021-04-25</lastmod>
+    <changefreq>daily</changefreq>
+    <priority>0.6</priority>
+  </url>
+  
+  <url>
+    <loc>https://stefanxiepj.github.io/tags/Hive/</loc>
+    <lastmod>2021-04-25</lastmod>
+    <changefreq>daily</changefreq>
+    <priority>0.6</priority>
+  </url>
+  
+  <url>
+    <loc>https://stefanxiepj.github.io/tags/Hadoop/</loc>
     <lastmod>2021-04-25</lastmod>
     <changefreq>daily</changefreq>
     <priority>0.6</priority>
@@ -543,14 +543,14 @@
   </url>
   
   <url>
-    <loc>https://stefanxiepj.github.io/tags/ssh/</loc>
+    <loc>https://stefanxiepj.github.io/tags/sort/</loc>
     <lastmod>2021-04-25</lastmod>
     <changefreq>daily</changefreq>
     <priority>0.6</priority>
   </url>
   
   <url>
-    <loc>https://stefanxiepj.github.io/tags/sort/</loc>
+    <loc>https://stefanxiepj.github.io/tags/ssh/</loc>
     <lastmod>2021-04-25</lastmod>
     <changefreq>daily</changefreq>
     <priority>0.6</priority>
