@@ -16,7 +16,7 @@
 <meta property="og:description" content="Mac 办公软件装机指南">
 <meta property="og:locale">
 <meta property="article:published_time" content="2018-08-26T01:02:41.000Z">
-<meta property="article:modified_time" content="2021-04-26T14:59:18.361Z">
+<meta property="article:modified_time" content="2021-04-28T06:15:15.556Z">
 <meta property="article:author" content="Jeff.R">
 <meta property="article:tag" content="mac">
 <meta name="twitter:card" content="summary">
@@ -194,8 +194,67 @@
 <h4 id="jdk"><a href="#jdk" class="headerlink" title="jdk"></a>jdk</h4><h4 id="typora"><a href="#typora" class="headerlink" title="typora"></a>typora</h4><p><a target="_blank" rel="noopener" href="https://www.typora.io/">https://www.typora.io</a></p>
 <h4 id="iterm"><a href="#iterm" class="headerlink" title="iterm"></a>iterm</h4><p><a target="_blank" rel="noopener" href="https://iterm2.com/">https://iterm2.com</a></p>
 <p><a target="_blank" rel="noopener" href="https://www.jianshu.com/p/405956cdaca6">https://www.jianshu.com/p/405956cdaca6</a></p>
-<h4 id="brew"><a href="#brew" class="headerlink" title="brew"></a>brew</h4><p><a target="_blank" rel="noopener" href="https://brew.idayer.com/guide/change-source/">https://brew.idayer.com/guide/change-source/</a></p>
-<h4 id="Alfred"><a href="#Alfred" class="headerlink" title="Alfred"></a>Alfred</h4>
+<h4 id="brew"><a href="#brew" class="headerlink" title="brew"></a>brew</h4><h5 id="如果你是初次安装，并且需要换其他源"><a href="#如果你是初次安装，并且需要换其他源" class="headerlink" title="如果你是初次安装，并且需要换其他源"></a>如果你是初次安装，并且需要换其他源</h5><p>脚本默认内置中科大镜像，如果需要换源，请使用小助手获取安装脚本：</p>
+<p>镜像：中科大    平台：macOS     终端类型：zsh</p>
+<figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br></pre></td><td class="code"><pre><span class="line"><span class="comment"># 1.执行安装脚本</span></span><br><span class="line"><span class="built_in">export</span> HOMEBREW_BREW_GIT_REMOTE=<span class="string">&quot;https://mirrors.ustc.edu.cn/brew.git&quot;</span></span><br><span class="line"><span class="built_in">export</span> HOMEBREW_CORE_GIT_REMOTE=<span class="string">&quot;https://mirrors.ustc.edu.cn/homebrew-core.git&quot;</span></span><br><span class="line">/bin/bash -c <span class="string">&quot;<span class="subst">$(curl -fsSL https://cdn.jsdelivr.net/gh/ineo6/homebrew-install/install.sh)</span>&quot;</span></span><br><span class="line"></span><br><span class="line"><span class="comment"># 2.安装完成后设置</span></span><br><span class="line"><span class="built_in">echo</span> <span class="string">&#x27;export HOMEBREW_BOTTLE_DOMAIN=https://mirrors.ustc.edu.cn/homebrew-bottles/bottles/&#x27;</span> &gt;&gt; ~/.zprofile</span><br><span class="line"><span class="built_in">source</span> ~/.zprofile</span><br></pre></td></tr></table></figure>
+
+<h5 id="如果你已经安装过，需要换源"><a href="#如果你已经安装过，需要换源" class="headerlink" title="如果你已经安装过，需要换源"></a>如果你已经安装过，需要换源</h5><p>选择”镜像”、”平台”、”终端类型”后，会自动生成对应的设置镜像脚本。</p>
+<p>镜像：中科大    平台：macOS    终端类型：zsh</p>
+<figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br></pre></td><td class="code"><pre><span class="line"><span class="comment"># 脚本</span></span><br><span class="line">git -C <span class="string">&quot;<span class="subst">$(brew --repo)</span>&quot;</span> remote set-url origin https://mirrors.ustc.edu.cn/brew.git</span><br><span class="line">git -C <span class="string">&quot;<span class="subst">$(brew --repo homebrew/core)</span>&quot;</span> remote set-url origin https://mirrors.ustc.edu.cn/homebrew-core.git</span><br><span class="line">git -C <span class="string">&quot;<span class="subst">$(brew --repo homebrew/cask)</span>&quot;</span> remote set-url origin https://mirrors.ustc.edu.cn/homebrew-cask.git</span><br><span class="line">brew update</span><br><span class="line"></span><br><span class="line"><span class="built_in">echo</span> <span class="string">&#x27;export HOMEBREW_BOTTLE_DOMAIN=https://mirrors.ustc.edu.cn/homebrew-bottles/bottles/&#x27;</span> &gt;&gt; ~/.zprofile</span><br><span class="line"><span class="built_in">source</span> ~/.zprofile</span><br></pre></td></tr></table></figure>
+
+
+
+<h5 id="brew-update-卡死问题"><a href="#brew-update-卡死问题" class="headerlink" title="brew update 卡死问题"></a>brew update 卡死问题</h5><p>1）更新git源</p>
+<figure class="highlight shell"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br></pre></td><td class="code"><pre><span class="line"><span class="meta">#</span><span class="bash">更新Homebrew</span></span><br><span class="line">cd &quot;$(brew --repo)&quot;</span><br><span class="line">git remote set-url origin https://mirrors.ustc.edu.cn/brew.git</span><br><span class="line"></span><br><span class="line"><span class="meta">#</span><span class="bash">更新Homebrew-core</span></span><br><span class="line">cd &quot;$(brew --repo)/Library/Taps/homebrew/homebrew-core&quot;</span><br><span class="line">git remote set-url origin https://mirrors.ustc.edu.cn/homebrew-core.git</span><br><span class="line"></span><br><span class="line"><span class="meta">#</span><span class="bash">更新Homebrew-cask（最重要的一步，很多更新完国内源依然卡就是没更新这个）</span></span><br><span class="line">cd &quot;$(brew --repo)&quot;/Library/Taps/homebrew/homebrew-cask</span><br><span class="line">git remote set-url origin https://mirrors.ustc.edu.cn/homebrew-cask.git</span><br><span class="line">ps：如果没有homebrew-cask这个目录可以找到/usr/local/Library……下的相关目录自己创建一个即可。</span><br></pre></td></tr></table></figure>
+
+<p>2）设置环境变量</p>
+<p>zsh环境下：</p>
+<figure class="highlight shell"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><span class="line">echo &#x27;export HOMEBREW_BOTTLE_DOMAIN=https://mirrors.ustc.edu.cn/homebrew-bottles/&#x27; &gt;&gt; ~/.zshrc</span><br><span class="line">source ~/.zshrc</span><br></pre></td></tr></table></figure>
+
+<p>bash环境下：</p>
+<figure class="highlight shell"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><span class="line">echo &#x27;export HOMEBREW_BOTTLE_DOMAIN=https://mirrors.ustc.edu.cn/homebrew-bottles/&#x27; &gt;&gt; ~/.bash_profile</span><br><span class="line">source ~/.bash_profile</span><br></pre></td></tr></table></figure>
+
+<p>3）更新brew</p>
+<figure class="highlight shell"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br></pre></td><td class="code"><pre><span class="line">brew update -v</span><br><span class="line">or</span><br><span class="line">brew update-reset</span><br></pre></td></tr></table></figure>
+
+
+
+<h5 id="brew-install-总出现-No-similarly-named-formulae-found-问题"><a href="#brew-install-总出现-No-similarly-named-formulae-found-问题" class="headerlink" title="brew install 总出现 No similarly named formulae found 问题"></a>brew install 总出现 No similarly named formulae found 问题</h5><figure class="highlight shell"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br></pre></td><td class="code"><pre><span class="line">git -C $(brew --repository homebrew/core) checkout master</span><br><span class="line">or</span><br><span class="line">git -C $(brew --repository homebrew/core) reset --hard HEAD</span><br></pre></td></tr></table></figure>
+
+
+
+<p>参考链接：</p>
+<p>参考：<a target="_blank" rel="noopener" href="https://brew.idayer.com/guide/change-source/">https://brew.idayer.com/guide/change-source/</a></p>
+<p><a target="_blank" rel="noopener" href="https://blog.csdn.net/danfengw/article/details/114362560">https://blog.csdn.net/danfengw/article/details/114362560</a></p>
+<h3 id="Alfred"><a href="#Alfred" class="headerlink" title="Alfred"></a>Alfred</h3><h3 id="Thrift"><a href="#Thrift" class="headerlink" title="Thrift"></a>Thrift</h3><h4 id="使用brew在线安装"><a href="#使用brew在线安装" class="headerlink" title="使用brew在线安装"></a>使用brew在线安装</h4><h5 id="①-查看thrift的最新版本"><a href="#①-查看thrift的最新版本" class="headerlink" title="① 查看thrift的最新版本"></a>① 查看thrift的最新版本</h5><figure class="highlight shell"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br></pre></td><td class="code"><pre><span class="line"><span class="meta">#</span><span class="bash"> ① 查看thrift的最新版本</span></span><br><span class="line">brew info thrift</span><br><span class="line"><span class="meta">#</span><span class="bash"> ② 查看brew支持的thrift版本，如果你需要的在这里面，可以直接安装</span></span><br><span class="line">brew search thrift</span><br></pre></td></tr></table></figure>
+
+<h5 id="②-卸载旧版本"><a href="#②-卸载旧版本" class="headerlink" title="② 卸载旧版本"></a>② 卸载旧版本</h5><figure class="highlight shell"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">brew uninstall thrift</span><br></pre></td></tr></table></figure>
+
+<h5 id="③-安装thrift依赖包"><a href="#③-安装thrift依赖包" class="headerlink" title="③ 安装thrift依赖包"></a>③ 安装thrift依赖包</h5><figure class="highlight shell"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">brew install boost openssl libevent bison</span><br></pre></td></tr></table></figure>
+
+<h5 id="④-安装最新版thrift"><a href="#④-安装最新版thrift" class="headerlink" title="④ 安装最新版thrift"></a>④ 安装最新版thrift</h5><figure class="highlight shell"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br></pre></td><td class="code"><pre><span class="line">brew install thrift</span><br><span class="line"><span class="meta">#</span><span class="bash"> 检查安装是否成功</span></span><br><span class="line">thrift -version</span><br></pre></td></tr></table></figure>
+
+<h5 id="⑤-安装指定版本的thrift"><a href="#⑤-安装指定版本的thrift" class="headerlink" title="⑤ 安装指定版本的thrift"></a>⑤ 安装指定版本的thrift</h5><p>注意提示中的内容。</p>
+<figure class="highlight shell"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br></pre></td><td class="code"><pre><span class="line">brew install thrift@0.9</span><br><span class="line">==&gt; Downloading https://mirrors.ustc.edu.cn/homebrew-bottles//thrift%400.9-0.9.3.1.big_sur.bottle.tar.gz</span><br><span class="line"><span class="meta">#</span><span class="bash"><span class="comment">####################################################################### 100.0%</span></span></span><br><span class="line">==&gt; Pouring thrift@0.9-0.9.3.1.big_sur.bottle.tar.gz</span><br><span class="line">==&gt; Caveats</span><br><span class="line">thrift@0.9 is keg-only, which means it was not symlinked into /usr/local,</span><br><span class="line">because this is an alternate version of another formula.</span><br><span class="line"></span><br><span class="line">If you need to have thrift@0.9 first in your PATH, run:</span><br><span class="line">  echo &#x27;export PATH=&quot;/usr/local/opt/thrift@0.9/bin:$PATH&quot;&#x27; &gt;&gt; ~/.zshrc</span><br><span class="line"></span><br><span class="line">For compilers to find thrift@0.9 you may need to set:</span><br><span class="line">  export LDFLAGS=&quot;-L/usr/local/opt/thrift@0.9/lib&quot;</span><br><span class="line">  export CPPFLAGS=&quot;-I/usr/local/opt/thrift@0.9/include&quot;</span><br></pre></td></tr></table></figure>
+
+
+
+<blockquote>
+<p>如果你想安装超过<code>0.9.3</code>的版本,那么你需要检查一下<code>bison</code>的版本,因为如果你的bison版本低于<code>2.5</code>,在安装thrift的时候会报错.<strong>configure: error: Bison version 2.5 or higher must be installed on the system!</strong></p>
+<p>执行:<code>bison -V</code>查看版本,如果低于2.5则进行以下操作.</p>
+<p>执行:<code>brew install bison</code> 安装最新版本的bison.</p>
+</blockquote>
+<figure class="highlight shell"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br></pre></td><td class="code"><pre><span class="line">brew reinstall bison</span><br><span class="line">==&gt; Downloading https://mirrors.ustc.edu.cn/homebrew-bottles//bison-3.7.6.big_sur.bottle.1.tar.gz</span><br><span class="line">Already downloaded: /Users/didi/Library/Caches/Homebrew/downloads/d628826c74f031aec744290d6ae73d10082a51fb6a07f7999b53b6ccb36f8094--bison-3.7.6.big_sur.bottle.1.tar.gz</span><br><span class="line">==&gt; Reinstalling bison</span><br><span class="line">==&gt; Pouring bison-3.7.6.big_sur.bottle.1.tar.gz</span><br><span class="line">==&gt; Caveats</span><br><span class="line">bison is keg-only, which means it was not symlinked into /usr/local,</span><br><span class="line">because macOS already provides this software and installing another version in</span><br><span class="line">parallel can cause all kinds of trouble.</span><br><span class="line"></span><br><span class="line">If you need to have bison first in your PATH, run:</span><br><span class="line">  echo &#x27;export PATH=&quot;/usr/local/opt/bison/bin:$PATH&quot;&#x27; &gt;&gt; ~/.zshrc</span><br><span class="line"></span><br><span class="line">For compilers to find bison you may need to set:</span><br><span class="line">  export LDFLAGS=&quot;-L/usr/local/opt/bison/lib&quot;</span><br><span class="line"></span><br><span class="line">==&gt; Summary</span><br><span class="line">🍺  /usr/local/Cellar/bison/3.7.6: 94 files, 3.3MB</span><br></pre></td></tr></table></figure>
+
+
+
+<h4 id="下载tar包离线安装"><a href="#下载tar包离线安装" class="headerlink" title="下载tar包离线安装"></a>下载tar包离线安装</h4><p>官网下载需要的包：<a target="_blank" rel="noopener" href="http://archive.apache.org/dist/thrift/">http://archive.apache.org/dist/thrift/</a></p>
+<p>安装命令：</p>
+<figure class="highlight shell"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br></pre></td><td class="code"><pre><span class="line">tar -zxvf thrift-0.11.0  </span><br><span class="line">cd thrift-0.11.0</span><br><span class="line">./configure </span><br><span class="line">make </span><br><span class="line">make install</span><br><span class="line"></span><br><span class="line"><span class="meta">#</span><span class="bash"> 验证</span></span><br><span class="line">thrift -version</span><br></pre></td></tr></table></figure>
+
+
+
+
       
 
 
@@ -325,18 +384,18 @@
   
 <nav id="article-nav">
   
-    <a href="/archives/80740cc0.html" id="article-nav-newer" class="article-nav-link-wrap">
+    <a href="/archives/3fbdb086.html" id="article-nav-newer" class="article-nav-link-wrap">
       <i class="icon-circle-left"></i>
       <div class="article-nav-title">
         
-          虚拟机环境下 hive-2.3.4 环境搭建
+          基于Git的代码开发测试发布流程
         
       </div>
     </a>
   
   
-    <a href="/archives/4a17b156.html" id="article-nav-older" class="article-nav-link-wrap">
-      <div class="article-nav-title">Hello World</div>
+    <a href="/archives/14b78418.html" id="article-nav-older" class="article-nav-link-wrap">
+      <div class="article-nav-title">photo</div>
       <i class="icon-circle-right"></i>
     </a>
   
@@ -525,11 +584,11 @@ return o(i(t),arguments.length<2?void 0:u(arguments[1]))}})},function(t,n,r){var
               </li>
              
               <li class="article-tag-list-item">
-                <a href="javascript:void(0)" class="js-tag color2">Thrift</a>
+                <a href="javascript:void(0)" class="js-tag color4">jvm</a>
               </li>
              
               <li class="article-tag-list-item">
-                <a href="javascript:void(0)" class="js-tag color4">jvm</a>
+                <a href="javascript:void(0)" class="js-tag color2">Thrift</a>
               </li>
              
               <li class="article-tag-list-item">
@@ -569,11 +628,11 @@ return o(i(t),arguments.length<2?void 0:u(arguments[1]))}})},function(t,n,r){var
               </li>
              
               <li class="article-tag-list-item">
-                <a href="javascript:void(0)" class="js-tag color2">Hadoop</a>
+                <a href="javascript:void(0)" class="js-tag color2">hadoop</a>
               </li>
              
               <li class="article-tag-list-item">
-                <a href="javascript:void(0)" class="js-tag color2">hadoop</a>
+                <a href="javascript:void(0)" class="js-tag color2">Hadoop</a>
               </li>
              
               <li class="article-tag-list-item">
