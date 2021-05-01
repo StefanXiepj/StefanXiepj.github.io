@@ -192,13 +192,13 @@
 
 <h1 id="前期准备"><a href="#前期准备" class="headerlink" title="前期准备"></a>前期准备</h1><h2 id="部署包下载"><a href="#部署包下载" class="headerlink" title="部署包下载"></a>部署包下载</h2><p>为节约时间，建议提前下载好安装包。</p>
 <ul>
-<li><input disabled="" type="checkbox"> hive元数据管理mysql数据库连接依赖包：mysql-connector-java-5.1.40-bin.jar</li>
-<li><input disabled="" type="checkbox"> hive部署包：apache-hive-2.3.4-bin.tar.gz</li>
+<li><input disabled type="checkbox"> hive元数据管理mysql数据库连接依赖包：mysql-connector-java-5.1.40-bin.jar</li>
+<li><input disabled type="checkbox"> hive部署包：apache-hive-2.3.4-bin.tar.gz</li>
 </ul>
 <h2 id="集群环境"><a href="#集群环境" class="headerlink" title="集群环境"></a>集群环境</h2><ul>
-<li><input disabled="" type="checkbox"> hadoop版本：hadoop-2.7.7</li>
-<li><input disabled="" type="checkbox"> jdk版本：jdk-8u191-linux-x64.tar.gz</li>
-<li><input disabled="" type="checkbox"> mysql版本：mysql-5.7.25-linux-glibc2.12-x86_64.tar.gz</li>
+<li><input disabled type="checkbox"> hadoop版本：hadoop-2.7.7</li>
+<li><input disabled type="checkbox"> jdk版本：jdk-8u191-linux-x64.tar.gz</li>
+<li><input disabled type="checkbox"> mysql版本：mysql-5.7.25-linux-glibc2.12-x86_64.tar.gz</li>
 </ul>
 <h2 id="依赖环境"><a href="#依赖环境" class="headerlink" title="依赖环境"></a>依赖环境</h2><p>如果没有hadoop环境，可以参考 虚拟机环境下 Hadoop2.7.7 的集群搭建 搭建。</p>
 <p>hive的元数据是通过关系型数据库来管理的，本文采用mysql数据库。如果没有安装mysql，可以参考 虚拟机环境下 mysql5.7.25 的安装。</p>
@@ -207,8 +207,8 @@
 
 <h2 id="目录规范"><a href="#目录规范" class="headerlink" title="目录规范"></a>目录规范</h2><p>约定将hive安装到 master 节点上。</p>
 <ul>
-<li><input disabled="" type="checkbox"> 软件安装目录： /home/hadoop/tools</li>
-<li><input disabled="" type="checkbox"> 安装包存放目录：/home/hadoop/tools/package</li>
+<li><input disabled type="checkbox"> 软件安装目录： /home/hadoop/tools</li>
+<li><input disabled type="checkbox"> 安装包存放目录：/home/hadoop/tools/package</li>
 </ul>
 <h1 id="hive-2-3-4安装及配置"><a href="#hive-2-3-4安装及配置" class="headerlink" title="hive-2.3.4安装及配置"></a>hive-2.3.4安装及配置</h1><h2 id="上传解压"><a href="#上传解压" class="headerlink" title="上传解压"></a>上传解压</h2><figure class="highlight shell"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><span class="line">scp apache-hive-2.3.4-bin.tar.gz hadoop@10.10.10.10:~/tools/package/</span><br><span class="line">tar -xzvf apache-hive-2.3.4-bin.tar.gz</span><br></pre></td></tr></table></figure>
 
@@ -617,11 +617,11 @@ return o(i(t),arguments.length<2?void 0:u(arguments[1]))}})},function(t,n,r){var
               </li>
              
               <li class="article-tag-list-item">
-                <a href="javascript:void(0)" class="js-tag color2">Hadoop</a>
+                <a href="javascript:void(0)" class="js-tag color2">hadoop</a>
               </li>
              
               <li class="article-tag-list-item">
-                <a href="javascript:void(0)" class="js-tag color2">hadoop</a>
+                <a href="javascript:void(0)" class="js-tag color2">Hadoop</a>
               </li>
              
               <li class="article-tag-list-item">

@@ -217,7 +217,7 @@
 <p>修复后我们在日志中打印出了异常触发的字段名称，如下所示：</p>
 <figure class="highlight shell"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">20/04/09 17:22:05 ERROR hive.HadoopTableReader: Exception thrown in field &lt;c1&gt;</span><br></pre></td></tr></table></figure>
 
-<p><img src="filecontent.png" alt="ERROR-log"></p>
+<p><img src="/archives/filecontent.png" alt="ERROR-log"></p>
 <h1 id="总结"><a href="#总结" class="headerlink" title="总结"></a>总结</h1><p><strong>hive查询正常的原因</strong>：hive引擎在查询时，会获取对应分区的元数据信息，因此不会出现类型异常；</p>
 <p><strong>spark查询异常的原因</strong>：spark在查询时，并没有获取对应分区的元数据信息，而是获取表的元数据信息（此时表的字段元数据和分区的字段元数据不同），因此出现了类型转换异常的错误。</p>
 <p>那些年你偷偷改过的字段，我们悄悄地将它记录到了日志中。下次遇到ClassCastException异常，快从我们提供的新功能中去发现蛛丝马迹，探寻那隐秘的角落。</p>
@@ -607,11 +607,11 @@ return o(i(t),arguments.length<2?void 0:u(arguments[1]))}})},function(t,n,r){var
               </li>
              
               <li class="article-tag-list-item">
-                <a href="javascript:void(0)" class="js-tag color2">Hadoop</a>
+                <a href="javascript:void(0)" class="js-tag color2">hadoop</a>
               </li>
              
               <li class="article-tag-list-item">
-                <a href="javascript:void(0)" class="js-tag color2">hadoop</a>
+                <a href="javascript:void(0)" class="js-tag color2">Hadoop</a>
               </li>
              
               <li class="article-tag-list-item">

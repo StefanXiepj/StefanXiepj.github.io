@@ -381,7 +381,7 @@
 <p><strong>线程优先级</strong>：prio=9</p>
 <p><strong>系统优先级</strong>：os_prio=0，并不是所有的操作系统都支持线程优先级，所以可能会出现0的情况</p>
 <p><strong>JVM中的线程ID</strong>：tid=0x00007f4e600df800，也有说法是内存地址（不深究）</p>
-<p><strong>本地线程ID</strong>：nid=0xe3b9，通过top -Hp <pid>查看到的线程id的十六进制表示（printf “%x\n” &lt;线程id&gt;）</p>
+<p><strong>本地线程ID</strong>：nid=0xe3b9，通过top -Hp <pid>查看到的线程id的十六进制表示（printf “%x\n” &lt;线程id&gt;）</pid></p>
 <p><strong>线程动作</strong>：runnable ，和线程状态对应，也可以理解为线程状态。</p>
 <p><strong>起始栈地址</strong>：[0x00007f4e27363000]</p>
 <h5 id="2-线程状态"><a href="#2-线程状态" class="headerlink" title="2 线程状态"></a>2 线程状态</h5><figure class="highlight shell"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">java.lang.Thread.State: WAITING (parking)</span><br></pre></td></tr></table></figure>
@@ -418,9 +418,9 @@
 <p>这里我们看到线程id是 149501。</p>
 <blockquote>
 <p>如何查看一个进程下的所有线程呢？</p>
-<p>可以通过命令查看：cat /proc/<PID>/task</p>
+<p>可以通过命令查看：cat /proc/<PID>/task</PID></p>
 <p>有什么用呢？通常我们可以看看某个服务进程的线程数是否打满：</p>
-<p>ll  /proc/<PID>/task | wc -l</p>
+<p>ll  /proc/<PID>/task | wc -l</PID></p>
 </blockquote>
 <p><strong>现场保留</strong>：为方便分析，通常我们会将<code>top</code>快照截图保存。</p>
 <h4 id="4-1-3-获取threaddump文件"><a href="#4-1-3-获取threaddump文件" class="headerlink" title="4.1.3 获取threaddump文件"></a>4.1.3 获取threaddump文件</h4><p>threaddump文件的获取和top快照的查看可以并行。</p>
@@ -812,11 +812,11 @@ return o(i(t),arguments.length<2?void 0:u(arguments[1]))}})},function(t,n,r){var
               </li>
              
               <li class="article-tag-list-item">
-                <a href="javascript:void(0)" class="js-tag color2">Hadoop</a>
+                <a href="javascript:void(0)" class="js-tag color2">hadoop</a>
               </li>
              
               <li class="article-tag-list-item">
-                <a href="javascript:void(0)" class="js-tag color2">hadoop</a>
+                <a href="javascript:void(0)" class="js-tag color2">Hadoop</a>
               </li>
              
               <li class="article-tag-list-item">

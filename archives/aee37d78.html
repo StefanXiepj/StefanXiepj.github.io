@@ -205,7 +205,7 @@
 <h3 id="数据恢复命令"><a href="#数据恢复命令" class="headerlink" title="数据恢复命令"></a>数据恢复命令</h3><p>恢复比较简单,直接用source即可</p>
 <h3 id="修改字符集"><a href="#修改字符集" class="headerlink" title="修改字符集"></a>修改字符集</h3><p>如果对备份数据扫描字符集 latin1 , 只存在于建表语句中, 数据中不包含时, 可以考虑修改字符集.<br>**方案: ** 批量替换备份文件中的字符集 latin1 为 utf8 (utf和8之间没有杠’-‘), 然后再恢复数据到新的库. 因为恢复数据时是新建表, 然后重新写入数据的, 所以不会出现乱码的情况.<br><strong>风险:</strong>  用户数据存在字符串 latin1 时, 存在很大的风险.</p>
 <p>所以, 该方案还是存在很大风险和可操作性的.</p>
-<p>可以通过下面的命令查看字符集有没有在数据中存在<br>grep “latin1” <dumpfile> | grep -i “insert”</p>
+<p>可以通过下面的命令查看字符集有没有在数据中存在<br>grep “latin1” <dumpfile> | grep -i “insert”</dumpfile></p>
 <h2 id="方案二-select…into-load-data"><a href="#方案二-select…into-load-data" class="headerlink" title="方案二: select…into/load data"></a>方案二: select…into/load data</h2><p>select…into 官网链接:<a target="_blank" rel="noopener" href="https://dev.mysql.com/doc/refman/5.7/en/select-into.html">https://dev.mysql.com/doc/refman/5.7/en/select-into.html</a><br>load data官网链接:<a target="_blank" rel="noopener" href="https://dev.mysql.com/doc/refman/5.7/en/load-data.html">https://dev.mysql.com/doc/refman/5.7/en/load-data.html</a></p>
 <p>测试发现是不可行的, 报错如下:</p>
 <figure class="highlight pgsql"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><span class="line">MySQL [hive]&gt; <span class="keyword">select</span> * <span class="keyword">into</span> outfile <span class="string">&#x27;/home/hadoop/xpj/mysqlbak/09-test.tbl&#x27;</span> <span class="keyword">from</span> db.test;</span><br><span class="line">ERROR <span class="number">1045</span> (<span class="number">28000</span>): <span class="keyword">Access</span> denied <span class="keyword">for</span> <span class="keyword">user</span> <span class="string">&#x27;test&#x27;</span>@<span class="string">&#x27;10.%&#x27;</span> (<span class="keyword">using</span> <span class="keyword">password</span>: YES)</span><br></pre></td></tr></table></figure>
@@ -592,11 +592,11 @@ return o(i(t),arguments.length<2?void 0:u(arguments[1]))}})},function(t,n,r){var
               </li>
              
               <li class="article-tag-list-item">
-                <a href="javascript:void(0)" class="js-tag color2">Hadoop</a>
+                <a href="javascript:void(0)" class="js-tag color2">hadoop</a>
               </li>
              
               <li class="article-tag-list-item">
-                <a href="javascript:void(0)" class="js-tag color2">hadoop</a>
+                <a href="javascript:void(0)" class="js-tag color2">Hadoop</a>
               </li>
              
               <li class="article-tag-list-item">

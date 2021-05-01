@@ -203,7 +203,7 @@
 <p>Map阶段实现Sheffle阶段的数据写入（或称作数据持久化），对应Shuffle Write。</p>
 <p>Reduce阶段实现Shuffle阶段的数据读取。对应Shuffle Read。</p>
 <h4 id="2、Spark-Shuffle-的框架"><a href="#2、Spark-Shuffle-的框架" class="headerlink" title="2、Spark Shuffle 的框架"></a>2、Spark Shuffle 的框架</h4><p>由于Shuffle的设计与实现决定着计算性能的优劣，所以Spark在设计之初，就对外提供了统一的接口 ShuffleManager，方便后续的扩展，用户可以自定义实现，实现可插拔性。下图是Spark3.1的接口：</p>
-<p><img src="ShuffleManager.png" alt="ShuffleManager"></p>
+<p><img src="/archives/ShuffleManager.png" alt="ShuffleManager"></p>
 <blockquote>
 <ul>
 <li>getReader：Reduce通过ShuffleHandle获取ShuffleReader。</li>
@@ -217,19 +217,19 @@
 <blockquote>
 <ul>
 <li><p>1.1版本：</p>
-<img src="ShuffleManager-1.6.png"  width="300"  height = "200" /> </li>
+<img src="/archives/ShuffleManager-1.6.png" width="300" height="200"> </li>
 <li><p>1.5版本</p>
-<img src="ShuffleManager-1.5.png"  width="300"  height = "200" />    </li>
+<img src="/archives/ShuffleManager-1.5.png" width="300" height="200">    </li>
 <li><p>1.6版本</p>
-<img src="ShuffleManager-1.6.png"  width="300"  height = "200" /> </li>
+<img src="/archives/ShuffleManager-1.6.png" width="300" height="200"> </li>
 <li><p>2.4+版本</p>
-<p><img src="ShuffleManager-2.4.png" alt="image-20210501122622326"> </p>
+<p><img src="/archives/ShuffleManager-2.4.png" alt="image-20210501122622326"> </p>
 </li>
 </ul>
 </blockquote>
 <h4 id="4、HashShuffleManager"><a href="#4、HashShuffleManager" class="headerlink" title="4、HashShuffleManager"></a>4、HashShuffleManager</h4><h5 id="4-1、最初版的HashShuffle实现"><a href="#4-1、最初版的HashShuffle实现" class="headerlink" title="4.1、最初版的HashShuffle实现"></a>4.1、最初版的HashShuffle实现</h5><p>在最初的版本中，Spark采用的是HashShuffle机制。</p>
 <p>下图是Spark0.5版本中的HashShuffle原理：</p>
-<p><img src="HashShuffle-0.5.png" alt="image-20210501161207124"></p>
+<p><img src="/archives/HashShuffle-0.5.png" alt="image-20210501161207124"></p>
 <blockquote>
 <p>HashShuffle的特点：</p>
 <ul>
@@ -248,7 +248,7 @@
 <li>2）写文件落盘通过BlockManager来进行管理</li>
 </ul>
 <h5 id="4-2、改进版的HashShuffle实现"><a href="#4-2、改进版的HashShuffle实现" class="headerlink" title="4.2、改进版的HashShuffle实现"></a>4.2、改进版的HashShuffle实现</h5><p>为解决M*R个文件数问题，在Spark0.8版本代码中，引入了一个开关<code>spark.shuffle.consolidateFiles</code>，并通过BlockManager控制多个task写同一个bucket文件，跳过了之前的bucket HashMap结构，直接写文件。架构如下：</p>
-<p><img src="HashShuffle-0.8.png" alt="image-20210501161207124"></p>
+<p><img src="/archives/HashShuffle-0.8.png" alt="image-20210501161207124"></p>
 <blockquote>
 <p>新版HashShuffle的优点：</p>
 <ul>
@@ -647,11 +647,11 @@ return o(i(t),arguments.length<2?void 0:u(arguments[1]))}})},function(t,n,r){var
               </li>
              
               <li class="article-tag-list-item">
-                <a href="javascript:void(0)" class="js-tag color2">Hadoop</a>
+                <a href="javascript:void(0)" class="js-tag color2">hadoop</a>
               </li>
              
               <li class="article-tag-list-item">
-                <a href="javascript:void(0)" class="js-tag color2">hadoop</a>
+                <a href="javascript:void(0)" class="js-tag color2">Hadoop</a>
               </li>
              
               <li class="article-tag-list-item">
