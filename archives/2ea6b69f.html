@@ -6,18 +6,28 @@
   <meta name="renderer" content="webkit">
   <meta http-equiv="X-UA-Compatible" content="IE=edge" >
   <link rel="dns-prefetch" href="https://stefanxiepj.github.io">
-  <title>Archives: 2018/6 | Late Summer</title>
+  <title>Spark的Shuffle原理深度解析 | Late Summer</title>
   <meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1">
-  <meta name="description" content="遇见暮夏.">
-<meta property="og:type" content="website">
-<meta property="og:title" content="Late Summer">
-<meta property="og:url" content="https://stefanxiepj.github.io/archives/2018/06/index.html">
+  <meta name="description" content="在大数据分布式计算框架中，Shuffle是影响计算性能的很重要的一环。无论是MapReduce框架还是Spark计算框架，都有Shuffle的概念。本文总结分析Spark Shuffle的设计和实现。">
+<meta property="og:type" content="article">
+<meta property="og:title" content="Spark的Shuffle原理深度解析">
+<meta property="og:url" content="https://stefanxiepj.github.io/archives/2ea6b69f.html">
 <meta property="og:site_name" content="Late Summer">
-<meta property="og:description" content="遇见暮夏.">
+<meta property="og:description" content="在大数据分布式计算框架中，Shuffle是影响计算性能的很重要的一环。无论是MapReduce框架还是Spark计算框架，都有Shuffle的概念。本文总结分析Spark Shuffle的设计和实现。">
 <meta property="og:locale">
+<meta property="og:image" content="https://stefanxiepj.github.io/archives/SparkShuffle/ShuffleManager.png">
+<meta property="og:image" content="https://stefanxiepj.github.io/archives/SparkShuffle/ShuffleManager-1.6.png">
+<meta property="og:image" content="https://stefanxiepj.github.io/archives/SparkShuffle/ShuffleManager-1.5.png">
+<meta property="og:image" content="https://stefanxiepj.github.io/archives/SparkShuffle/ShuffleManager-1.6.png">
+<meta property="og:image" content="https://stefanxiepj.github.io/archives/SparkShuffle/ShuffleManager-2.4.png">
+<meta property="og:image" content="https://stefanxiepj.github.io/archives/SparkShuffle/HashShuffle-0.5.png">
+<meta property="og:image" content="https://stefanxiepj.github.io/archives/SparkShuffle/HashShuffle-0.8.png">
+<meta property="article:published_time" content="2021-05-01T01:02:41.000Z">
+<meta property="article:modified_time" content="2021-05-01T10:41:00.462Z">
 <meta property="article:author" content="Jeff.R">
-<meta property="article:tag" content="hive,spark,hadoop,java,scala">
+<meta property="article:tag" content="spark">
 <meta name="twitter:card" content="summary">
+<meta name="twitter:image" content="https://stefanxiepj.github.io/archives/SparkShuffle/ShuffleManager.png">
   
     <link rel="alternative" href="/atom.xml" title="Late Summer" type="application/atom+xml">
   
@@ -154,43 +164,183 @@
             <canvas data-colors="#eaeaea" data-sectionHeight="100" data-contentId="js-content" id="myCanvas1" class="anm-canvas"></canvas>
           </div>
           <div id="js-content" class="content-ll">
-            
-  
-  
+            <article id="post-44-SparkShuffle" class="article article-type-post " itemscope itemprop="blogPost">
+  <div class="article-inner">
     
-    
-      
-      
-      <section class="archives-wrap">
-        <div class="archive-year-wrap">
-          <a href="/archives/2018" class="archive-year">2018</a>
-        </div>
-        <div class="archives">
-    
-    <article class="archive-article archive-type-post">
-  <div class="archive-article-inner">
-    <header class="archive-article-header">
-      	<div class="article-meta">
-	      	<a href="/archives/6cd1c454.html" class="archive-article-date">
-  	<time datetime="2018-06-15T15:56:59.000Z" itemprop="datePublished"><i class="icon-calendar icon"></i>2018-06-15</time>
-</a>
-        </div>
-    	 
+      <header class="article-header">
+        
   
-    <h1 itemprop="name">
-      <a class="archive-article-title" href="/archives/6cd1c454.html">Thrift架构及源码解读</a>
+    <h1 class="article-title" itemprop="name">
+      Spark的Shuffle原理深度解析
     </h1>
   
 
-        <div class="article-info info-on-right">
-          
+        
+        <a href="/archives/2ea6b69f.html" class="archive-article-date">
+  	<time datetime="2021-05-01T01:02:41.000Z" itemprop="datePublished"><i class="icon-calendar icon"></i>2021-05-01</time>
+</a>
+        
+
+        <!-- 需要添加的位置 -->
+        <!-- 开始添加字数统计-->
+        
+        <!-- 添加完成 -->
+
+        
+          <span class="archive-article-date">
+              阅读量 <span id="busuanzi_value_page_pv"></span>
+          </span>
+        
+      </header>
+    
+    <div class="article-entry" itemprop="articleBody">
+      
+        <p>在大数据分布式计算框架中，Shuffle是影响计算性能的很重要的一环。无论是MapReduce框架还是Spark计算框架，都有Shuffle的概念。本文总结分析Spark Shuffle的设计和实现。</p>
+<span id="more"></span>
+
+<p>[toc]</p>
+<h4 id="1、-理解MR框架中的Map和Reduce"><a href="#1、-理解MR框架中的Map和Reduce" class="headerlink" title="1、 理解MR框架中的Map和Reduce"></a>1、 理解MR框架中的Map和Reduce</h4><p>在MapReduce框架中，Shuffle是介于Map和Reduce两个阶段之间，也称作Map和Reduce的连接桥梁。</p>
+<p>Map阶段实现Sheffle阶段的数据写入（或称作数据持久化），对应Shuffle Write。</p>
+<p>Reduce阶段实现Shuffle阶段的数据读取。对应Shuffle Read。</p>
+<h4 id="2、Spark-Shuffle-的框架"><a href="#2、Spark-Shuffle-的框架" class="headerlink" title="2、Spark Shuffle 的框架"></a>2、Spark Shuffle 的框架</h4><p>由于Shuffle的设计与实现决定着计算性能的优劣，所以Spark在设计之初，就对外提供了统一的接口 ShuffleManager，方便后续的扩展，用户可以自定义实现，实现可插拔性。下图是Spark3.1的接口：</p>
+<p><img src="SparkShuffle/ShuffleManager.png" alt="ShuffleManager"></p>
+<blockquote>
+<ul>
+<li>getReader：Reduce通过ShuffleHandle获取ShuffleReader。</li>
+<li>getWriter：Map通过ShuffleHandle获取ShuffleWriter。</li>
+<li>registerShuffle：RDD通过依赖关系注册shuffle，获取ShuffleHandle，最终是通过ShuffleHandle来获取读和写。</li>
+<li>shuffleBlockResolver：shuffle的块解析器，和数据块之间构建关联关系。</li>
+</ul>
+<p>其余方法顾名思义。</p>
+</blockquote>
+<h4 id="3、Spark-Shuffle框架的演进图"><a href="#3、Spark-Shuffle框架的演进图" class="headerlink" title="3、Spark Shuffle框架的演进图"></a>3、Spark Shuffle框架的演进图</h4><p>随着Spark版本的迭代，整体Shuffle的演进也是变化蛮大的。从Spark1.1分支开始，引入ShuffleManager接口，统一封装了SparkShuffle的框架。演进图如下：</p>
+<blockquote>
+<ul>
+<li><p>1.1版本：</p>
+<img src="SparkShuffle/ShuffleManager-1.6.png"  width="300"  height = "200" /> </li>
+<li><p>1.5版本</p>
+<img src="SparkShuffle/ShuffleManager-1.5.png"  width="300"  height = "200" />    </li>
+<li><p>1.6版本</p>
+<img src="SparkShuffle/ShuffleManager-1.6.png"  width="300"  height = "200" /> </li>
+<li><p>2.4+版本</p>
+<p><img src="SparkShuffle/ShuffleManager-2.4.png" alt="image-20210501122622326"> </p>
+</li>
+</ul>
+</blockquote>
+<h4 id="4、HashShuffleManager"><a href="#4、HashShuffleManager" class="headerlink" title="4、HashShuffleManager"></a>4、HashShuffleManager</h4><h5 id="4-1、最初版的HashShuffle实现"><a href="#4-1、最初版的HashShuffle实现" class="headerlink" title="4.1、最初版的HashShuffle实现"></a>4.1、最初版的HashShuffle实现</h5><p>在最初的版本中，Spark采用的是HashShuffle机制。</p>
+<p>下图是Spark0.5版本中的HashShuffle原理：</p>
+<p><img src="SparkShuffle/HashShuffle-0.5.png" alt="image-20210501161207124"></p>
+<blockquote>
+<p>HashShuffle的特点：</p>
+<ul>
+<li>每个map task会为每一个reduce task创建一个bucket缓存，每个bucket缓存最终会落盘一个文件</li>
+<li>bucket缓存底层是一个JHashMap，数据会根据key的hash值最终写到对应的bucket中去</li>
+</ul>
+<p>这种实现存在的问题：</p>
+<ul>
+<li>shuffle文件数较大。M个map，R个reduce时，会落盘M*R个文件（更多的是小文件）。网络带宽等会成为瓶颈。</li>
+<li>bucket是将数据存储在HashMap结构的内存中，当数据量较大时，容易导致内存溢出。</li>
+</ul>
+</blockquote>
+<p>在Spark0.6版本中，主要有两个变化：</p>
+<ul>
+<li>1）增加了是否在Map侧进行数据预聚合的逻辑</li>
+<li>2）写文件落盘通过BlockManager来进行管理</li>
+</ul>
+<h5 id="4-2、改进版的HashShuffle实现"><a href="#4-2、改进版的HashShuffle实现" class="headerlink" title="4.2、改进版的HashShuffle实现"></a>4.2、改进版的HashShuffle实现</h5><p>为解决M*R个文件数问题，在Spark0.8版本代码中，引入了一个开关<code>spark.shuffle.consolidateFiles</code>，并通过BlockManager控制多个task写同一个bucket文件，跳过了之前的bucket HashMap结构，直接写文件。架构如下：</p>
+<p><img src="SparkShuffle/HashShuffle-0.8.png" alt="image-20210501161207124"></p>
+<blockquote>
+<p>新版HashShuffle的优点：</p>
+<ul>
+<li>同一个executor里每一个core（也就是同一个线程）会创建R个block file；</li>
+<li>2个executor，2个core，100个map，3个reduce为例，改进版将会减少文件数100倍：<ul>
+<li>最初版：2 * 2 * 100 * 3 = 1200 个文件</li>
+<li>改进版：2 * 2 * 3 = 12 个文件</li>
+</ul>
+</li>
+</ul>
+<p>存在的问题：在reduce数量或core数量较大的情况下，依然避免不了大量小文件问题。</p>
+</blockquote>
+<h4 id="5、SortShuffleManager"><a href="#5、SortShuffleManager" class="headerlink" title="5、SortShuffleManager"></a>5、SortShuffleManager</h4><p>1.1版本引入ShuffleManager之后，除了默认的HashShuffle，还支持了新的SortShuffle。HashShuffle并未解决Shuffle过程中大量小文件的问题，SortShuffle采用了这样的机制：</p>
+<blockquote>
+<p>在map端对数据进行排序，然后map所有的task将数据以FileSegment为抽象写入同一个数据文件，另外将索引写入一个索引文件。</p>
+</blockquote>
+<p>（未完待续）</p>
+<h6 id="源码解读"><a href="#源码解读" class="headerlink" title="源码解读"></a>源码解读</h6><figure class="highlight scala"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br><span class="line">27</span><br><span class="line">28</span><br><span class="line">29</span><br><span class="line">30</span><br><span class="line">31</span><br><span class="line">32</span><br><span class="line">33</span><br><span class="line">34</span><br><span class="line">35</span><br><span class="line">36</span><br><span class="line">37</span><br><span class="line">38</span><br><span class="line">39</span><br><span class="line">40</span><br><span class="line">41</span><br><span class="line">42</span><br><span class="line">43</span><br><span class="line">44</span><br><span class="line">45</span><br><span class="line">46</span><br><span class="line">47</span><br><span class="line">48</span><br><span class="line">49</span><br><span class="line">50</span><br><span class="line">51</span><br><span class="line">52</span><br><span class="line">53</span><br><span class="line">54</span><br><span class="line">55</span><br><span class="line">56</span><br><span class="line">57</span><br><span class="line">58</span><br><span class="line">59</span><br><span class="line">60</span><br></pre></td><td class="code"><pre><span class="line"><span class="comment">/**</span></span><br><span class="line"><span class="comment"> * Spark0.5 版本中的实现：</span></span><br><span class="line"><span class="comment"> */</span></span><br><span class="line"><span class="class"><span class="keyword">class</span> <span class="title">ShuffleMapTask</span>(<span class="params"></span></span></span><br><span class="line"><span class="class"><span class="params">    runId: <span class="type">Int</span>,</span></span></span><br><span class="line"><span class="class"><span class="params">    stageId: <span class="type">Int</span>,</span></span></span><br><span class="line"><span class="class"><span class="params">    rdd: <span class="type">RDD</span>[_], </span></span></span><br><span class="line"><span class="class"><span class="params">    dep: <span class="type">ShuffleDependency</span>[_,_,_],</span></span></span><br><span class="line"><span class="class"><span class="params">    val partition: <span class="type">Int</span>, </span></span></span><br><span class="line"><span class="class"><span class="params">    locs: <span class="type">Seq</span>[<span class="type">String</span>]</span>)</span></span><br><span class="line"><span class="class">  <span class="keyword">extends</span> <span class="title">DAGTask</span>[<span class="type">String</span>](<span class="params">runId, stageId</span>)</span></span><br><span class="line"><span class="class">  <span class="keyword">with</span> <span class="title">Logging</span> </span>&#123;</span><br><span class="line">  </span><br><span class="line">  <span class="keyword">val</span> split = rdd.splits(partition)</span><br><span class="line"></span><br><span class="line">  <span class="keyword">override</span> <span class="function"><span class="keyword">def</span> <span class="title">run</span> </span>(attemptId: <span class="type">Int</span>): <span class="type">String</span> = &#123;</span><br><span class="line">    <span class="comment">// 从RDD依赖关系中可以获取到当前Stage的分区数（可就是Reduce的数量）</span></span><br><span class="line">    <span class="keyword">val</span> numOutputSplits = dep.partitioner.numPartitions</span><br><span class="line">    <span class="comment">// 获取当key相同时的聚合器</span></span><br><span class="line">    <span class="keyword">val</span> aggregator = dep.aggregator.asInstanceOf[<span class="type">Aggregator</span>[<span class="type">Any</span>, <span class="type">Any</span>, <span class="type">Any</span>]]</span><br><span class="line">    <span class="comment">// 分区对象</span></span><br><span class="line">    <span class="keyword">val</span> partitioner = dep.partitioner.asInstanceOf[<span class="type">Partitioner</span>]</span><br><span class="line">    <span class="comment">// 根据Reduce数量构建相同数量的bucket，bucket的本质是一个数组嵌套Map的结构</span></span><br><span class="line">    <span class="keyword">val</span> buckets = <span class="type">Array</span>.tabulate(numOutputSplits)(_ =&gt; <span class="keyword">new</span> <span class="type">JHashMap</span>[<span class="type">Any</span>, <span class="type">Any</span>])</span><br><span class="line">    <span class="comment">// 迭代当前task的每条记录，根据key的hash值获取对应的bucket（map），将数据添加到bucket中</span></span><br><span class="line">    <span class="keyword">for</span> (elem &lt;- rdd.iterator(split)) &#123;</span><br><span class="line">      <span class="keyword">val</span> (k, v) = elem.asInstanceOf[(<span class="type">Any</span>, <span class="type">Any</span>)]</span><br><span class="line">      <span class="comment">// 根据记录key的hash值，获取到对应的bucket数组下标</span></span><br><span class="line">      <span class="keyword">var</span> bucketId = partitioner.getPartition(k)</span><br><span class="line">      <span class="comment">// 将数据存储在bucket（本质是个map）中，如果key相同的情况下，根据上文的聚合器进行聚合</span></span><br><span class="line">      <span class="keyword">val</span> bucket = buckets(bucketId)</span><br><span class="line">      <span class="keyword">var</span> existing = bucket.get(k)</span><br><span class="line">      <span class="keyword">if</span> (existing == <span class="literal">null</span>) &#123;</span><br><span class="line">        bucket.put(k, aggregator.createCombiner(v))</span><br><span class="line">      &#125; <span class="keyword">else</span> &#123;</span><br><span class="line">        bucket.put(k, aggregator.mergeValue(existing, v))</span><br><span class="line">      &#125;</span><br><span class="line">    &#125;</span><br><span class="line">    <span class="comment">// 获取序列化方式</span></span><br><span class="line">    <span class="keyword">val</span> ser = <span class="type">SparkEnv</span>.get.serializer.newInstance()</span><br><span class="line">    <span class="keyword">for</span> (i &lt;- <span class="number">0</span> until numOutputSplits) &#123;</span><br><span class="line">      <span class="comment">// 获取输出文件。这里可以看出，一个partition需要构建numOutputSplits个输出文件。</span></span><br><span class="line">      <span class="keyword">val</span> file = <span class="type">SparkEnv</span>.get.shuffleManager.getOutputFile(dep.shuffleId, partition, i)</span><br><span class="line">      <span class="keyword">val</span> out = ser.outputStream(<span class="keyword">new</span> <span class="type">FastBufferedOutputStream</span>(<span class="keyword">new</span> <span class="type">FileOutputStream</span>(file)))</span><br><span class="line">      out.writeObject(buckets(i).size)</span><br><span class="line">      <span class="keyword">val</span> iter = buckets(i).entrySet().iterator()</span><br><span class="line">      <span class="keyword">while</span> (iter.hasNext()) &#123;</span><br><span class="line">        <span class="keyword">val</span> entry = iter.next()</span><br><span class="line">        out.writeObject((entry.getKey, entry.getValue))</span><br><span class="line">      &#125;</span><br><span class="line">      <span class="comment">// <span class="doctag">TODO:</span> have some kind of EOF marker</span></span><br><span class="line">      out.close()</span><br><span class="line">    &#125;</span><br><span class="line">    <span class="keyword">return</span> <span class="type">SparkEnv</span>.get.shuffleManager.getServerUri</span><br><span class="line">  &#125;</span><br><span class="line"></span><br><span class="line">  <span class="keyword">override</span> <span class="function"><span class="keyword">def</span> <span class="title">preferredLocations</span></span>: <span class="type">Seq</span>[<span class="type">String</span>] = locs</span><br><span class="line"></span><br><span class="line">  <span class="keyword">override</span> <span class="function"><span class="keyword">def</span> <span class="title">toString</span> </span>= <span class="string">&quot;ShuffleMapTask(%d, %d)&quot;</span>.format(stageId, partition)</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+
+
+
+
+
+
+
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br></pre></td><td class="code"><pre><span class="line">graph TD</span><br><span class="line">0[ShuffleManager] --&gt; 1[HashShuffleManager]</span><br><span class="line">0[ShuffleManager] --&gt; 2[SortShuffleManager]</span><br></pre></td></tr></table></figure>
+
+
+
+
+
+
+
+
+      
+
+
+
+  <div class="declare">
+    <strong>本文作者：</strong>
+    
+      Jeff.R
+    
+    <br>
+    <strong>本文链接：</strong>
+    https://stefanxiepj.github.io/archives/2ea6b69f.html
+    <br>
+    <strong>版权声明：</strong>
+    本作品采用
+    <a rel="license noopener" target="_blank" href="https://creativecommons.org/licenses/by-nc-sa/4.0/">知识共享署名-非商业性使用-相同方式共享 4.0 国际许可协议</a>
+    进行许可。转载请注明出处！
+    
+      <br>
+      <a rel="license noopener" target="_blank" href="https://creativecommons.org/licenses/by-nc-sa/4.0/"><img alt="知识共享许可协议" style="border-width:0" src="https://i.creativecommons.org/l/by-nc-sa/4.0/88x31.png"/></a>
+    
+  </div>
+
+
+
+      
+        <div class="page-reward">
+          <a href="javascript:;" class="page-reward-btn tooltip-top">
+            <div class="tooltip tooltip-east">
+            <span class="tooltip-item">
+              赏
+            </span>
+            <span class="tooltip-content">
+              <span class="tooltip-text">
+                <span class="tooltip-inner">
+                  <p class="reward-p"><i class="icon icon-quo-left"></i>谢谢你请我吃糖果<i class="icon icon-quo-right"></i></p>
+                  <div class="reward-box">
+                    
+                    
+                  </div>
+                </span>
+              </span>
+            </span>
+          </div>
+          </a>
+        </div>
+      
+    </div>
+    <div class="article-info article-info-index">
+      
+      
 	<div class="article-tag tagcloud">
 		<i class="icon-price-tags icon"></i>
 		<ul class="article-tag-list">
 			 
         		<li class="article-tag-list-item">
                                     		
-                         	<a href="javascript:void(0)" class="js-tag article-tag-list-link color2">Thrift</a>
+                         	<a href="javascript:void(0)" class="js-tag article-tag-list-link color1">spark</a>
                                     
 		        </li>
       		
@@ -198,19 +348,127 @@
 	</div>
 
 
-          
+      
 
+      
+
+      
+        
+<div class="share-btn share-icons tooltip-left">
+  <div class="tooltip tooltip-east">
+    <span class="tooltip-item">
+      <a href="javascript:;" class="share-sns share-outer">
+        <i class="icon icon-share"></i>
+      </a>
+    </span>
+    <span class="tooltip-content">
+      <div class="share-wrap">
+        <div class="share-icons">
+          <a class="weibo share-sns" href="javascript:;" data-type="weibo">
+            <i class="icon icon-weibo"></i>
+          </a>
+          <a class="weixin share-sns wxFab" href="javascript:;" data-type="weixin">
+            <i class="icon icon-weixin"></i>
+          </a>
+          <a class="qq share-sns" href="javascript:;" data-type="qq">
+            <i class="icon icon-qq"></i>
+          </a>
+          <a class="douban share-sns" href="javascript:;" data-type="douban">
+            <i class="icon icon-douban"></i>
+          </a>
+          <a class="qzone share-sns" href="javascript:;" data-type="qzone">
+            <i class="icon icon-qzone"></i>
+          </a>
+          <a class="facebook share-sns" href="javascript:;" data-type="facebook">
+            <i class="icon icon-facebook"></i>
+          </a>
+          <a class="twitter share-sns" href="javascript:;" data-type="twitter">
+            <i class="icon icon-twitter"></i>
+          </a>
+          <a class="google share-sns" href="javascript:;" data-type="google">
+            <i class="icon icon-google"></i>
+          </a>
         </div>
-        <div class="clearfix"></div>
-    </header>
+      </div>
+    </span>
+  </div>
+</div>
+
+<div class="page-modal wx-share js-wx-box">
+    <a class="close js-modal-close" href="javascript:;"><i class="icon icon-close"></i></a>
+    <p>扫一扫，分享到微信</p>
+    <div class="wx-qrcode">
+      <img src="//pan.baidu.com/share/qrcode?url=https://stefanxiepj.github.io/archives/2ea6b69f.html" alt="微信分享二维码">
+    </div>
+</div>
+
+<div class="mask js-mask"></div>
+      
+      <div class="clearfix"></div>
+    </div>
   </div>
 </article>
+
+  
+<nav id="article-nav">
   
   
-    </div></section>
+    <a href="/archives/1404c17c.html" id="article-nav-older" class="article-nav-link-wrap">
+      <div class="article-nav-title">HiveMetricsCpuHigh</div>
+      <i class="icon-circle-right"></i>
+    </a>
+  
+</nav>
+
+
+<aside class="wrap-side-operation">
+    <div class="mod-side-operation">
+        
+        <div class="jump-container" id="js-jump-container" style="display:none;">
+            <a href="javascript:void(0)" class="mod-side-operation__jump-to-top">
+                <i class="icon-font icon-back"></i>
+            </a>
+            <div id="js-jump-plan-container" class="jump-plan-container" style="top: -11px;">
+                <i class="icon-font icon-plane jump-plane"></i>
+            </div>
+        </div>
+        
+        
+    </div>
+</aside>
+
+
+
+  
+  
   
 
-    
+  
+
+  
+
+  
+
+      <div id="gitalk-container"></div>
+<link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/gitalk@1/dist/gitalk.css">
+<script src="https://cdn.jsdelivr.net/npm/gitalk@1/dist/gitalk.min.js"></script>
+<script src="https://cdn.bootcss.com/blueimp-md5/2.10.0/js/md5.js"></script>
+
+<script>
+var gitalk = new Gitalk({
+  clientID: '43b5ad4e377378c80272',
+  clientSecret: 'bf694bf86d7ac87618e8e9463b259de99c0de313',
+  repo: 'https://github.com/StefanXiepj/gitalk',
+  owner: 'stefan_xiepj@126.com',
+  admin: ['stefan_xiepj@126.com'],
+  id: md5(window.location.pathname),
+  distractionFreeMode: true
+})
+
+gitalk.render('gitalk-container')
+</script>
+
+  
 
 
           </div>
@@ -263,8 +521,8 @@
 	var yiliaConfig = {
 		mathjax: false,
 		isHome: false,
-		isPost: false,
-		isArchive: true,
+		isPost: true,
+		isArchive: false,
 		isTag: false,
 		isCategory: false,
 		open_in_new: false,
