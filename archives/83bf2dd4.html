@@ -15,14 +15,14 @@
 <meta property="og:site_name" content="Late Summer">
 <meta property="og:description" content="自SparkSQL横空出世以来，受到了广大大数据开发同学的热捧。如果说Hive是数仓领域任劳任怨的一头老牛，那Spark SQL好比是一匹枣红快马。我们也于今年(2020)年初启动了离线计算提速专项项目，通过近乎透明的方式实现了一套Hive SQL至Spark SQL的迁移工具。">
 <meta property="og:locale">
-<meta property="og:image" content="https://stefanxiepj.github.io/archives/image.png">
-<meta property="og:image" content="https://stefanxiepj.github.io/archives/image-spark.png">
+<meta property="og:image" content="https://stefanxiepj.github.io/archives/83bf2dd4/image.png">
+<meta property="og:image" content="https://stefanxiepj.github.io/archives/83bf2dd4/image-spark.png">
 <meta property="article:published_time" content="2020-09-10T15:58:31.000Z">
 <meta property="article:modified_time" content="2021-04-26T14:46:53.074Z">
 <meta property="article:author" content="Jeff.R">
 <meta property="article:tag" content="Hive">
 <meta name="twitter:card" content="summary">
-<meta name="twitter:image" content="https://stefanxiepj.github.io/archives/image.png">
+<meta name="twitter:image" content="https://stefanxiepj.github.io/archives/83bf2dd4/image.png">
   
     <link rel="alternative" href="/atom.xml" title="Late Summer" type="application/atom+xml">
   
@@ -212,7 +212,7 @@
 
 <h2 id="为何慢？"><a href="#为何慢？" class="headerlink" title="为何慢？"></a>为何慢？</h2><p>前面知道了哪里慢，下面需要追根溯源，去探究为何慢？ </p>
 <p>根据 Stage-20 对应的 tracking url，查看对应 RM 日志如下：  </p>
-<p><img src="/archives/image.png" alt="mr-log"></p>
+<p><img src="/archives/83bf2dd4/image.png" alt="mr-log"></p>
 <p>可以看出 hang 在数据读取上，但线索貌似中断了。往往在这时用户会选择放弃，但作为有技术洁癖的引擎开发人员而言，<strong>这个问题得解</strong>。 </p>
 <p>此时轮到另一个抓手 jstack 隆重出场了。</p>
 <figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">Tips： 当任务卡住不动时，我们可以通过jstack查看当前线程的状态。</span><br></pre></td></tr></table></figure>
@@ -234,7 +234,7 @@
 
 <p>我们发现仅需231秒便运行完毕，较优化前性能提升近10倍。 </p>
 <h1 id="Spark为何快？"><a href="#Spark为何快？" class="headerlink" title="Spark为何快？"></a>Spark为何快？</h1><p>我们前面提到，该案例是我们在做离线计算提速专项中，将Hive任务迁移至Spark发现的，那不禁要问，Spark为何快呢？一起来看Spark的执行计划：</p>
-<p><img src="/archives/image-spark.png" alt="spark-explain"></p>
+<p><img src="/archives/83bf2dd4/image-spark.png" alt="spark-explain"></p>
 <p>可以看出，上图红框中isnotnull过滤条件中并没有做cast类型转换，而是将该阶段放在了读取数据之后。</p>
 <h1 id="一些思考"><a href="#一些思考" class="headerlink" title="一些思考"></a>一些思考</h1><p>我们从一个 Hive SQL 任务运行缓慢的实际案例出发，阐述了定位，分析以及调优的经过。从整体来看，Hive SQL 的调优繁琐，往往令关注业务的数仓同学望而却步。而 Spark SQL 以天然的底层优化，降低了用户调优的门槛。本文大篇幅阐述了一个Hive SQL调优的经过，旨在抛砖引玉，推荐用户更多地倾向于使用 Spark 引擎，从而带来更大的性能提升和收益。</p>
 
