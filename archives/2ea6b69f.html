@@ -15,19 +15,19 @@
 <meta property="og:site_name" content="Late Summer">
 <meta property="og:description" content="在大数据分布式计算框架中，Shuffle是影响计算性能的很重要的一环。无论是MapReduce框架还是Spark计算框架，都有Shuffle的概念。本文总结分析Spark Shuffle的设计和实现。">
 <meta property="og:locale">
-<meta property="og:image" content="https://stefanxiepj.github.io/archives/2ea6b69f/ShuffleManager.png">
-<meta property="og:image" content="https://stefanxiepj.github.io/archives/2ea6b69f/ShuffleManager-1.6.png">
-<meta property="og:image" content="https://stefanxiepj.github.io/archives/2ea6b69f/ShuffleManager-1.5.png">
-<meta property="og:image" content="https://stefanxiepj.github.io/archives/2ea6b69f/ShuffleManager-1.6.png">
-<meta property="og:image" content="https://stefanxiepj.github.io/archives/2ea6b69f/ShuffleManager-2.4.png">
-<meta property="og:image" content="https://stefanxiepj.github.io/archives/2ea6b69f/HashShuffle-0.5.png">
-<meta property="og:image" content="https://stefanxiepj.github.io/archives/2ea6b69f/HashShuffle-0.8.png">
+<meta property="og:image" content="https://stefanxiepj.github.io/archives/ShuffleManager.png">
+<meta property="og:image" content="https://stefanxiepj.github.io/archives/ShuffleManager-1.6.png">
+<meta property="og:image" content="https://stefanxiepj.github.io/archives/ShuffleManager-1.5.png">
+<meta property="og:image" content="https://stefanxiepj.github.io/archives/ShuffleManager-1.6.png">
+<meta property="og:image" content="https://stefanxiepj.github.io/archives/ShuffleManager-2.4.png">
+<meta property="og:image" content="https://stefanxiepj.github.io/archives/HashShuffle-0.5.png">
+<meta property="og:image" content="https://stefanxiepj.github.io/archives/HashShuffle-0.8.png">
 <meta property="article:published_time" content="2021-05-01T01:02:41.000Z">
 <meta property="article:modified_time" content="2021-05-01T10:55:09.401Z">
 <meta property="article:author" content="Jeff.R">
 <meta property="article:tag" content="spark">
 <meta name="twitter:card" content="summary">
-<meta name="twitter:image" content="https://stefanxiepj.github.io/archives/2ea6b69f/ShuffleManager.png">
+<meta name="twitter:image" content="https://stefanxiepj.github.io/archives/ShuffleManager.png">
   
     <link rel="alternative" href="/atom.xml" title="Late Summer" type="application/atom+xml">
   
@@ -203,7 +203,7 @@
 <p>Map阶段实现Sheffle阶段的数据写入（或称作数据持久化），对应Shuffle Write。</p>
 <p>Reduce阶段实现Shuffle阶段的数据读取。对应Shuffle Read。</p>
 <h4 id="2、Spark-Shuffle-的框架"><a href="#2、Spark-Shuffle-的框架" class="headerlink" title="2、Spark Shuffle 的框架"></a>2、Spark Shuffle 的框架</h4><p>由于Shuffle的设计与实现决定着计算性能的优劣，所以Spark在设计之初，就对外提供了统一的接口 ShuffleManager，方便后续的扩展，用户可以自定义实现，实现可插拔性。下图是Spark3.1的接口：</p>
-<p><img src="/archives/2ea6b69f/ShuffleManager.png" alt="ShuffleManager"></p>
+<p><img src="/archives/ShuffleManager.png" alt="ShuffleManager"></p>
 <blockquote>
 <ul>
 <li>getReader：Reduce通过ShuffleHandle获取ShuffleReader。</li>
@@ -217,19 +217,19 @@
 <blockquote>
 <ul>
 <li><p>1.1版本：</p>
-<img src="/archives/2ea6b69f/ShuffleManager-1.6.png" width="300" height="200"> </li>
+<img src="/archives/ShuffleManager-1.6.png" width="300" height="200"> </li>
 <li><p>1.5版本</p>
-<img src="/archives/2ea6b69f/ShuffleManager-1.5.png" width="300" height="200">    </li>
+<img src="/archives/ShuffleManager-1.5.png" width="300" height="200">    </li>
 <li><p>1.6版本</p>
-<img src="/archives/2ea6b69f/ShuffleManager-1.6.png" width="300" height="200"> </li>
+<img src="/archives/ShuffleManager-1.6.png" width="300" height="200"> </li>
 <li><p>2.4+版本</p>
-<p><img src="/archives/2ea6b69f/ShuffleManager-2.4.png" alt="image-20210501122622326"> </p>
+<p><img src="/archives/ShuffleManager-2.4.png" alt="image-20210501122622326"> </p>
 </li>
 </ul>
 </blockquote>
 <h4 id="4、HashShuffleManager"><a href="#4、HashShuffleManager" class="headerlink" title="4、HashShuffleManager"></a>4、HashShuffleManager</h4><h5 id="4-1、最初版的HashShuffle实现"><a href="#4-1、最初版的HashShuffle实现" class="headerlink" title="4.1、最初版的HashShuffle实现"></a>4.1、最初版的HashShuffle实现</h5><p>在最初的版本中，Spark采用的是HashShuffle机制。</p>
 <p>下图是Spark0.5版本中的HashShuffle原理：</p>
-<p><img src="/archives/2ea6b69f/HashShuffle-0.5.png" alt="image-20210501161207124"></p>
+<p><img src="/archives/HashShuffle-0.5.png" alt="image-20210501161207124"></p>
 <blockquote>
 <p>HashShuffle的特点：</p>
 <ul>
@@ -248,7 +248,7 @@
 <li>2）写文件落盘通过BlockManager来进行管理</li>
 </ul>
 <h5 id="4-2、改进版的HashShuffle实现"><a href="#4-2、改进版的HashShuffle实现" class="headerlink" title="4.2、改进版的HashShuffle实现"></a>4.2、改进版的HashShuffle实现</h5><p>为解决M*R个文件数问题，在Spark0.8版本代码中，引入了一个开关<code>spark.shuffle.consolidateFiles</code>，并通过BlockManager控制多个task写同一个bucket文件，跳过了之前的bucket HashMap结构，直接写文件。架构如下：</p>
-<p><img src="/archives/2ea6b69f/HashShuffle-0.8.png" alt="image-20210501161207124"></p>
+<p><img src="/archives/HashShuffle-0.8.png" alt="image-20210501161207124"></p>
 <blockquote>
 <p>新版HashShuffle的优点：</p>
 <ul>
@@ -599,15 +599,15 @@ return o(i(t),arguments.length<2?void 0:u(arguments[1]))}})},function(t,n,r){var
               </li>
              
               <li class="article-tag-list-item">
+                <a href="javascript:void(0)" class="js-tag color2">Thrift</a>
+              </li>
+             
+              <li class="article-tag-list-item">
                 <a href="javascript:void(0)" class="js-tag color4">ssh</a>
               </li>
              
               <li class="article-tag-list-item">
                 <a href="javascript:void(0)" class="js-tag color4">jvm</a>
-              </li>
-             
-              <li class="article-tag-list-item">
-                <a href="javascript:void(0)" class="js-tag color2">Thrift</a>
               </li>
              
               <li class="article-tag-list-item">

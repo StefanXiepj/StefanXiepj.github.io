@@ -15,13 +15,13 @@
 <meta property="og:site_name" content="Late Summer">
 <meta property="og:description" content="深夜，突然被告警电话吵醒。虽然心里万马奔腾但你依然睡眼惺忪地爬起来打开了电脑，一看，例行的调度任务报错了。你一筹莫展，走投无路之下，忐忑不安地拨通了离线存储计算引擎值班同学的电话求助。">
 <meta property="og:locale">
-<meta property="og:image" content="https://stefanxiepj.github.io/archives/62aea827/filecontent.png">
+<meta property="og:image" content="https://stefanxiepj.github.io/archives/filecontent.png">
 <meta property="article:published_time" content="2020-06-03T13:18:01.000Z">
 <meta property="article:modified_time" content="2021-04-28T06:13:10.063Z">
 <meta property="article:author" content="Jeff.R">
 <meta property="article:tag" content="Spark">
 <meta name="twitter:card" content="summary">
-<meta name="twitter:image" content="https://stefanxiepj.github.io/archives/62aea827/filecontent.png">
+<meta name="twitter:image" content="https://stefanxiepj.github.io/archives/filecontent.png">
   
     <link rel="alternative" href="/atom.xml" title="Late Summer" type="application/atom+xml">
   
@@ -217,7 +217,7 @@
 <p>修复后我们在日志中打印出了异常触发的字段名称，如下所示：</p>
 <figure class="highlight shell"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">20/04/09 17:22:05 ERROR hive.HadoopTableReader: Exception thrown in field &lt;c1&gt;</span><br></pre></td></tr></table></figure>
 
-<p><img src="/archives/62aea827/filecontent.png" alt="ERROR-log"></p>
+<p><img src="/archives/filecontent.png" alt="ERROR-log"></p>
 <h1 id="总结"><a href="#总结" class="headerlink" title="总结"></a>总结</h1><p><strong>hive查询正常的原因</strong>：hive引擎在查询时，会获取对应分区的元数据信息，因此不会出现类型异常；</p>
 <p><strong>spark查询异常的原因</strong>：spark在查询时，并没有获取对应分区的元数据信息，而是获取表的元数据信息（此时表的字段元数据和分区的字段元数据不同），因此出现了类型转换异常的错误。</p>
 <p>那些年你偷偷改过的字段，我们悄悄地将它记录到了日志中。下次遇到ClassCastException异常，快从我们提供的新功能中去发现蛛丝马迹，探寻那隐秘的角落。</p>
@@ -559,15 +559,15 @@ return o(i(t),arguments.length<2?void 0:u(arguments[1]))}})},function(t,n,r){var
               </li>
              
               <li class="article-tag-list-item">
+                <a href="javascript:void(0)" class="js-tag color2">Thrift</a>
+              </li>
+             
+              <li class="article-tag-list-item">
                 <a href="javascript:void(0)" class="js-tag color4">ssh</a>
               </li>
              
               <li class="article-tag-list-item">
                 <a href="javascript:void(0)" class="js-tag color4">jvm</a>
-              </li>
-             
-              <li class="article-tag-list-item">
-                <a href="javascript:void(0)" class="js-tag color2">Thrift</a>
               </li>
              
               <li class="article-tag-list-item">
