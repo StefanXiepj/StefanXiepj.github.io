@@ -473,13 +473,6 @@
   </url>
   
   <url>
-    <loc>https://stefanxiepj.github.io/tags/Thrift/</loc>
-    <lastmod>2021-05-09</lastmod>
-    <changefreq>daily</changefreq>
-    <priority>0.6</priority>
-  </url>
-  
-  <url>
     <loc>https://stefanxiepj.github.io/tags/log4j2/</loc>
     <lastmod>2021-05-09</lastmod>
     <changefreq>daily</changefreq>
@@ -488,6 +481,13 @@
   
   <url>
     <loc>https://stefanxiepj.github.io/tags/ssh/</loc>
+    <lastmod>2021-05-09</lastmod>
+    <changefreq>daily</changefreq>
+    <priority>0.6</priority>
+  </url>
+  
+  <url>
+    <loc>https://stefanxiepj.github.io/tags/Thrift/</loc>
     <lastmod>2021-05-09</lastmod>
     <changefreq>daily</changefreq>
     <priority>0.6</priority>
@@ -515,14 +515,14 @@
   </url>
   
   <url>
-    <loc>https://stefanxiepj.github.io/tags/Spark/</loc>
+    <loc>https://stefanxiepj.github.io/tags/Hive/</loc>
     <lastmod>2021-05-09</lastmod>
     <changefreq>daily</changefreq>
     <priority>0.6</priority>
   </url>
   
   <url>
-    <loc>https://stefanxiepj.github.io/tags/Hive/</loc>
+    <loc>https://stefanxiepj.github.io/tags/Spark/</loc>
     <lastmod>2021-05-09</lastmod>
     <changefreq>daily</changefreq>
     <priority>0.6</priority>
